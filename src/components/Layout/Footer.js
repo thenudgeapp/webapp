@@ -1,24 +1,24 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { Container, Row, Col, Form, Input, Label } from 'reactstrap';
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import { Container, Row, Col, Form, Input, Label } from 'reactstrap'
 
 //Import Icons
-import FeatherIcon from 'feather-icons-react';
+import FeatherIcon from 'feather-icons-react'
 
 // import images
-import americanEx from '../../assets/images/payments/american-ex.png';
-import discover from '../../assets/images/payments/discover.png';
-import masterCard from '../../assets/images/payments/master-card.png';
-import paypal from '../../assets/images/payments/paypal.png';
-import visa from '../../assets/images/payments/visa.png';
+import americanEx from '../../assets/images/payments/american-ex.png'
+import discover from '../../assets/images/payments/discover.png'
+import masterCard from '../../assets/images/payments/master-card.png'
+import paypal from '../../assets/images/payments/paypal.png'
+import visa from '../../assets/images/payments/visa.png'
 
 //Import Images
-import logolight from '../../assets/images/logo-light.png';
-import logodark from '../../assets/images/logo-dark.png';
+import logolight from '../../assets/images/logo-light.png'
+import logodark from '../../assets/images/logo-dark.png'
 
 class Footer extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       grid1: [
         { title: 'About us', link: '#' },
@@ -59,12 +59,12 @@ class Footer extends Component {
           title: 'Visa',
         },
       ],
-    };
+    }
   }
 
   render() {
     return (
-      <React.Fragment>       
+      <React.Fragment>
 
         <footer className="footer">
           <Container>
@@ -287,8 +287,8 @@ class Footer extends Component {
           </div>
         </footer>
       </React.Fragment>
-    );
+    )
   }
 }
 
-export default Footer;
+export default Footer

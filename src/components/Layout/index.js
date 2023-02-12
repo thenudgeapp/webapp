@@ -1,27 +1,28 @@
-import React, { Component, Suspense } from "react";
-import { withRouter } from "react-router-dom";
-import Tagline from "./Tagline";
-import ThemeSwitcher from "./ThemeSwitcher";
-import BackToTop from "./backToTop";
+import React, { Component, Suspense } from "react"
+import { withRouter } from "react-router-dom"
+import Tagline from "./Tagline"
+import ThemeSwitcher from "./ThemeSwitcher"
+import BackToTop from "./backToTop"
 
 
 // Layout Components
-const Topbar = React.lazy(() => import("./Topbar"));
+const Topbar = React.lazy(() => import("./Topbar"))
 const NavbarPage = React.lazy(() =>
   import("../../pages/Saas Onepage/NavbarPage")
-);
-const Footer = React.lazy(() => import("./Footer"));
+)
+const Footer = React.lazy(() => import("./Footer"))
+const FooterMin = React.lazy(() => import("../../pages/Pages/PageFooterLayouts/Footer5a"))
 const FooterWithoutMenuLightSocialOnly = React.lazy(() =>
   import("./FooterWithoutMenuLightSocialOnly")
-);
+)
 
 // const CustomDot = () => {
 //   return (
 //     <React.Fragment>
 //       <FeatherIcon icon="arrow-up" className="icons" />
 //     </React.Fragment>
-//   );
-// };
+//   )
+// }
 
 const CryptoTagline = () => {
   return <div className="container-fluid">
@@ -57,12 +58,12 @@ const Loader = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-class Layout extends Component { 
+class Layout extends Component {
   render() {
-    const tagLineContent = this.props.location.pathname === "/index-crypto-two" ? <Tagline><CryptoTagline /></Tagline> : null;
+    const tagLineContent = this.props.location.pathname === "/index-crypto-two" ? <Tagline><CryptoTagline /></Tagline> : null
     return (
       <React.Fragment>
         <Suspense fallback={Loader()}>
@@ -77,7 +78,7 @@ class Layout extends Component {
             if (
               this.props.location.pathname === "/index-job"
             ) {
-              return <Footer isLight={true} />;
+              return <Footer isLight={true} />
             } else if (
               this.props.location.pathname === "/index-portfolio" ||
               this.props.location.pathname === "/index-logistics" ||
@@ -94,7 +95,7 @@ class Layout extends Component {
                 <>
 
                 </>
-              );
+              )
             } else if (
               this.props.location.pathname === "/index-personal" ||
               this.props.location.pathname === "/helpcenter-overview" ||
@@ -102,10 +103,10 @@ class Layout extends Component {
               this.props.location.pathname === '/helpcenter-support-request' ||
               this.props.location.pathname === "/page-invoice"
             ) {
-              return <FooterWithoutMenuLightSocialOnly className="" />;
+              return <FooterWithoutMenuLightSocialOnly className="" />
             }
             else {
-              return <Footer />;
+              return <FooterMin />
             }
           })()}
 
@@ -119,12 +120,11 @@ class Layout extends Component {
             <CustomDot />
           </ScrollUpButton> */}
           <BackToTop />
-          <ThemeSwitcher />
         </Suspense>
 
       </React.Fragment>
-    );
+    )
   }
 }
 
-export default withRouter(Layout);
+export default withRouter(Layout)

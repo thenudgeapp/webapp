@@ -48,9 +48,7 @@ export default class index extends Component {
         <section className="section mt-0 mt-md-5">
           <Features />
           <Timeline />
-          <TaskManager />
           <GreatFeatures />
-          <Price />
           <GetInTouch />
         </section>
         <Popup />

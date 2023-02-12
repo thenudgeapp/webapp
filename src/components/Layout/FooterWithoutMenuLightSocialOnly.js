@@ -1,14 +1,14 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { Container, Row, Col } from "reactstrap";
+import React, { Component } from "react"
+import { Link } from "react-router-dom"
+import { Container, Row, Col } from "reactstrap"
 
 //Import Icons
-import FeatherIcon from "feather-icons-react";
+import FeatherIcon from "feather-icons-react"
 
 class FooterWithoutMenuLightSocialOnly extends Component {
   constructor(props) {
-    super(props);
-    this.state = {};
+    super(props)
+    this.state = {}
   }
 
   render() {
@@ -39,37 +39,37 @@ class FooterWithoutMenuLightSocialOnly extends Component {
               <Col sm="6" className="mt-4 mt-sm-0 pt-2 pt-sm-0">
                 <ul className="list-unstyled social-icon foot-social-icon text-sm-end mb-0">
                   <li className="list-inline-item mb-0">
-                    <Link to="#" className="rounded">                      
+                    <Link to="#" className="rounded">
                         <FeatherIcon
                           icon="facebook"
                           className="fea icon-sm fea-social"
-                        />                     
+                        />
                     </Link>
                   </li>{" "}
                   <li className="list-inline-item mb-0">
-                    <Link to="#" className="rounded">                      
+                    <Link to="#" className="rounded">
                         <FeatherIcon
                           icon="instagram"
                           className="fea icon-sm fea-social"
-                        />                     
+                        />
                     </Link>
                   </li>{" "}
                   <li className="list-inline-item mb-0">
-                    <Link to="#" className="rounded">                      
+                    <Link to="#" className="rounded">
                         <FeatherIcon
                           icon="twitter"
                           className="fea icon-sm fea-social"
-                        />                     
+                        />
                     </Link>
                   </li>{" "}
                   <li className="list-inline-item mb-0">
-                    <Link to="#" className="rounded">                      
+                    <Link to="#" className="rounded">
                         <FeatherIcon
                           icon="linkedin"
                           className="fea icon-sm fea-social"
-                        />                     
+                        />
                     </Link>
-                  </li>                  
+                  </li>
                 </ul>
               </Col>
             </Row>
@@ -77,8 +77,8 @@ class FooterWithoutMenuLightSocialOnly extends Component {
           </div>
         </footer>
       </React.Fragment>
-    );
+    )
   }
 }
 
-export default FooterWithoutMenuLightSocialOnly;
+export default FooterWithoutMenuLightSocialOnly

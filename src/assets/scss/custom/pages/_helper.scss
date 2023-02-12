@@ -70,7 +70,7 @@
         font-size: 45px !important;
         letter-spacing: 1px;
         @media (max-width: 768px) {
-            font-size: 35px !important;
+            font-size: 24px !important;
         }
     }
     .para-desc {
@@ -82,20 +82,20 @@
     .title {
         letter-spacing: 0.5px;
         font-size: 30px !important;
-        
+
         @media (max-width: 768px) {
             font-size: 24px !important;
         }
     }
-} 
+}
 .text-shadow-title {
-    text-shadow: 2px 0 0 $white, 
-                -2px 0 0 $white, 
-                0 4px 0 rgba($white, 0.4), 
-                0 -2px 0 $white, 
-                1px 1px $white, 
-                -1px -1px 0 $white, 
-                1px -1px 0 $white, 
+    text-shadow: 2px 0 0 $white,
+                -2px 0 0 $white,
+                0 4px 0 rgba($white, 0.4),
+                0 -2px 0 $white,
+                1px 1px $white,
+                -1px -1px 0 $white,
+                1px -1px 0 $white,
                 -1px 1px 0 $white;
 }
 .para-desc {
@@ -117,10 +117,10 @@
     .move-text {
         animation: moveSlideshow 12s linear infinite;
     }
-}  
+}
 @keyframes moveSlideshow {
-    100% { 
-        transform: translateX(-45%);  
+    100% {
+        transform: translateX(-45%);
     }
 }
 
@@ -187,7 +187,7 @@
     z-index: 1;
 
     @media (min-width: 769px) and (max-width: 1024px) {
-        right: -20rem;        
+        right: -20rem;
     }
 
     @media (min-width: 426px) and (max-width: 768px) {
@@ -258,25 +258,25 @@
         background-size: cover;
     }
     @media (max-width: 1024px) {
-        font-size: 180px;        
+        font-size: 180px;
     }
     @media (max-width: 768px) {
-        font-size: 135px;        
+        font-size: 135px;
     }
     @media (max-width: 425px) {
-        font-size: 50px;        
+        font-size: 50px;
     }
 }
-  
+
 @media (min-width: 768px) {
     .margin-top-100 {
-        margin-top: 100px;
+        margin-top: 50px;
     }
 }
 @media (max-width: 768px) {
     .mt-60 {
         margin-top: 60px;
-    }   
+    }
 }
 
 .background-effect {
@@ -409,7 +409,7 @@
     }
 }
 
-[class^=uil-], 
+[class^=uil-],
 [class*=" uil-"] {
     &:before {
         margin: 0;

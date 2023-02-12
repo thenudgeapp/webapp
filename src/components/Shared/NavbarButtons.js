@@ -1,57 +1,57 @@
-import React, { Component } from "react";
+import React, { Component } from "react"
 import {
   Form,
   Dropdown,
   DropdownMenu,
   DropdownToggle,
-} from "reactstrap";
-import { Link } from "react-router-dom";
+} from "reactstrap"
+import { Link } from "react-router-dom"
 
 //Import Icons
-import FeatherIcon from "feather-icons-react";
+import FeatherIcon from "feather-icons-react"
 
-import RightSidebar from '../Layout/RightSidebar';
+import RightSidebar from '../Layout/RightSidebar'
 
 //React Drawer
-import ReactDrawer from 'react-drawer';
-import 'react-drawer/lib/react-drawer.css';
+import ReactDrawer from 'react-drawer'
+import 'react-drawer/lib/react-drawer.css'
 
 export default class NavbarButtons extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       open: false,
       position: 'right',
       dropdownOpen: false,
       modal: false,
-    };
-    this.toggleRightDrawer = this.toggleRightDrawer.bind(this);
-    this.onDrawerClose = this.onDrawerClose.bind(this);
-    this.toggleDropdown.bind(this);
-    this.togglemodal.bind(this);
+    }
+    this.toggleRightDrawer = this.toggleRightDrawer.bind(this)
+    this.onDrawerClose = this.onDrawerClose.bind(this)
+    this.toggleDropdown.bind(this)
+    this.togglemodal.bind(this)
   }
 
   toggleDropdown = () => {
     this.setState({
       dropdownOpen: !this.state.dropdownOpen,
-    });
-  };
+    })
+  }
   togglemodal = () => {
     this.setState((prevState) => ({
       modal: !prevState.modal,
-    }));
-  };
+    }))
+  }
 
   toggleRightDrawer = () => {
-    this.setState({ position: 'right' });
-    this.setState({ open: !this.state.open });
-  };
+    this.setState({ position: 'right' })
+    this.setState({ open: !this.state.open })
+  }
   onDrawerClose = () => {
-    this.setState({ open: false });
-  };
+    this.setState({ open: false })
+  }
 
   initMenu() {
-    this.activateMenu();
+    this.activateMenu()
   }
   render() {
     return (
@@ -116,6 +116,6 @@ export default class NavbarButtons extends Component {
           <RightSidebar onClose={this.onDrawerClose} />
         </ReactDrawer>
       </React.Fragment>
-    );
+    )
   }
 }

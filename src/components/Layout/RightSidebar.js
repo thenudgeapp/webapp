@@ -1,25 +1,25 @@
-import React, { Component } from 'react';
-import { Card, CardBody, Col, Row } from 'reactstrap';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import { Card, CardBody, Col, Row } from 'reactstrap'
+import PropTypes from 'prop-types'
 
 //Import Icons
-import FeatherIcon from 'feather-icons-react';
+import FeatherIcon from 'feather-icons-react'
 
 //import images
-import logodark from "../../assets/images/logo-dark.png";
-import logolight from "../../assets/images/logo-light.png";
-import contact from "../../assets/images/contact.svg";
-import { Link } from 'react-router-dom';
+import logodark from "../../assets/images/logo-dark.png"
+import logolight from "../../assets/images/logo-light.png"
+import contact from "../../assets/images/contact.svg"
+import { Link } from 'react-router-dom'
 
 class RightSidebar extends Component {
     constructor(props) {
-        super(props);
-        this.state = {};
-        this.onCloseRightBar = this.onCloseRightBar.bind(this);
+        super(props)
+        this.state = {}
+        this.onCloseRightBar = this.onCloseRightBar.bind(this)
     }
     onCloseRightBar = () => {
-        this.props.onClose();
-    };   
+        this.props.onClose()
+    }
 
     render() {
         return (
@@ -123,12 +123,12 @@ class RightSidebar extends Component {
                     </div>
                 </div>
             </React.Fragment>
-        );
+        )
     }
 }
 
 RightSidebar.propTypes = {
     onClose: PropTypes.func
-};
+}
 
-export default RightSidebar;
+export default RightSidebar

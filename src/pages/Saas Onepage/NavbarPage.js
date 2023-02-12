@@ -1,23 +1,23 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { Container } from "reactstrap";
-import ScrollspyNav from "./scrollSpy";
+import React, { Component } from "react"
+import { Link } from "react-router-dom"
+import { Container } from "reactstrap"
+import ScrollspyNav from "./scrollSpy"
 
 //Import Images
-import logodark from "../../assets/images/logo-dark.png";
+import logodark from "../../assets/images/logo-dark.png"
 
-import RightSidebar from '../../components/Layout/RightSidebar';
+import RightSidebar from '../../components/Layout/RightSidebar'
 
 //React Drawer
-import ReactDrawer from 'react-drawer';
-import 'react-drawer/lib/react-drawer.css';
+import ReactDrawer from 'react-drawer'
+import 'react-drawer/lib/react-drawer.css'
 
 //Import Icons
-import FeatherIcon from "feather-icons-react";
+import FeatherIcon from "feather-icons-react"
 
 class NavbarPage extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       navItems: [
         { id: 1, idnm: "home", navheading: "Home" },
@@ -28,32 +28,32 @@ class NavbarPage extends Component {
       ],
       open: false,
       position: 'right',
-    };
-    this.toggleLine = this.toggleLine.bind(this);
-    this.toggleRightDrawer = this.toggleRightDrawer.bind(this);
-    this.onDrawerClose = this.onDrawerClose.bind(this);
+    }
+    this.toggleLine = this.toggleLine.bind(this)
+    this.toggleRightDrawer = this.toggleRightDrawer.bind(this)
+    this.onDrawerClose = this.onDrawerClose.bind(this)
   }
 
   toggleLine() {
-    this.setState((prevState) => ({ isOpen: !prevState.isOpen }));
+    this.setState((prevState) => ({ isOpen: !prevState.isOpen }))
   }
   toggleRightDrawer = () => {
-    this.setState({ position: 'right' });
-    this.setState({ open: !this.state.open });
-  };
+    this.setState({ position: 'right' })
+    this.setState({ open: !this.state.open })
+  }
   onDrawerClose = () => {
-    this.setState({ open: false });
-  };
+    this.setState({ open: false })
+  }
 
   initMenu() {
-    this.activateMenu();
+    this.activateMenu()
   }
 
   render() {
     //Store all Navigationbar Id into TargetID variable(Used for Scrollspy)
     let targetId = this.state.navItems.map((item) => {
-      return item.idnm;
-    });
+      return item.idnm
+    })
     return (
       <React.Fragment>
         <header id="topnav" className="defaultscroll sticky">
@@ -136,8 +136,8 @@ class NavbarPage extends Component {
           <RightSidebar onClose={this.onDrawerClose} />
         </ReactDrawer>
       </React.Fragment>
-    );
+    )
   }
 }
 
-export default NavbarPage;
+export default NavbarPage

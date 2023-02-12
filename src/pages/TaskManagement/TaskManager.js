@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from "react"
 import {
   Col,
   Container,
@@ -7,27 +7,27 @@ import {
   Row,
   TabContent,
   TabPane,
-} from "reactstrap";
-import classnames from "classnames";
+} from "reactstrap"
+import classnames from "classnames"
 
-import apps from "../../assets/images/task/apps.png";
-import widgets2 from "../../assets/images/task/widgets2.png";
-import task from "../../assets/images/task/task.png";
-import file from "../../assets/images/task/file.png";
+import apps from "../../assets/images/task/apps.png"
+import widgets2 from "../../assets/images/task/widgets2.png"
+import task from "../../assets/images/task/task.png"
+import file from "../../assets/images/task/file.png"
 
 export default class TaskManager extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       activeTab: "1",
-    };
-    this.toggleTab = this.toggleTab.bind(this);
+    }
+    this.toggleTab = this.toggleTab.bind(this)
   }
   toggleTab(tab) {
     if (this.state.activeTab !== tab) {
       this.setState({
         activeTab: tab,
-      });
+      })
     }
   }
   render() {
@@ -38,16 +38,12 @@ export default class TaskManager extends Component {
             <Col xs={12}>
               <div className="section-title text-center mb-4 pb-2">
                 <h4 className="title mb-4">
-                  Discover what makes{" "}
-                  <span className="text-primary">Task manager</span> great.
+                  Features to {" "}
+                  <span className="text-primary">enable</span> you achieve {" "}
+                  <span className="text-primary">great</span> results
                 </h4>
                 <p className="text-muted para-desc mb-0 mx-auto">
-                  Start working with{" "}
-                  <span className="text-primary fw-bold">
-                    Landrick
-                  </span>{" "}
-                  that can provide everything you need to generate awareness,
-                  drive traffic, connect.
+                  Designed to help product managers and software engineers work better.
                 </p>
               </div>
             </Col>{" "}
@@ -67,7 +63,7 @@ export default class TaskManager extends Component {
                       "rounded-md"
                     )}
                     onClick={() => {
-                      this.toggleTab("1");
+                      this.toggleTab("1")
                     }}
                   >
                     <div className="p-3 text-start">
@@ -88,7 +84,7 @@ export default class TaskManager extends Component {
                       "rounded-md"
                     )}
                     onClick={() => {
-                      this.toggleTab("2");
+                      this.toggleTab("2")
                     }}
                   >
                     <div className="p-3 text-start">
@@ -109,7 +105,7 @@ export default class TaskManager extends Component {
                       "rounded-md"
                     )}
                     onClick={() => {
-                      this.toggleTab("3");
+                      this.toggleTab("3")
                     }}
                   >
                     <div className="p-3 text-start">
@@ -130,7 +126,7 @@ export default class TaskManager extends Component {
                       "rounded-md"
                     )}
                     onClick={() => {
-                      this.toggleTab("4");
+                      this.toggleTab("4")
                     }}
                   >
                     <div className="p-3 text-start">
@@ -182,6 +178,6 @@ export default class TaskManager extends Component {
           </Row>{" "}
         </Container>
       </React.Fragment>
-    );
+    )
   }
 }

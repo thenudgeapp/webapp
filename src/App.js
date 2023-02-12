@@ -1,20 +1,20 @@
-import React, { Component, Suspense } from "react";
-import Layout from "./components/Layout/";
+import React, { Component, Suspense } from "react"
+import Layout from "./components/Layout/"
 import {
   Route,
   Switch,
   BrowserRouter as Router,
   withRouter,
-} from "react-router-dom";
+} from "react-router-dom"
 
 // Import Css
 import "./assets/css/materialdesignicons.min.css"
-import "./Apps.scss";
+import "./Apps.scss"
 
-// import "./assets/css/colors/default.css";
+// import "./assets/css/colors/default.css"
 
 // Include Routes
-import routes from "./routes/allRoutes";
+import routes from "./routes/allRoutes"
 
 function withLayout(WrappedComponent, hasDarkTopBar) {
   // ...and returns another component...
@@ -25,9 +25,9 @@ function withLayout(WrappedComponent, hasDarkTopBar) {
         <Layout hasDarkTopBar={hasDarkTopBar}>
           <WrappedComponent></WrappedComponent>
         </Layout>
-      );
+      )
     }
-  };
+  }
 }
 
 class App extends Component {
@@ -41,8 +41,8 @@ class App extends Component {
           </div>
         </div>
       </div>
-    );
-  };
+    )
+  }
   render() {
     return (
       <React.Fragment>
@@ -70,8 +70,8 @@ class App extends Component {
           </Suspense>
         </Router>
       </React.Fragment>
-    );
+    )
   }
 }
 
-export default withRouter(App);
+export default withRouter(App)

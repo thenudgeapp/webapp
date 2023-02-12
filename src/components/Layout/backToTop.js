@@ -1,24 +1,24 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import { Link } from 'react-router-dom'
 
 //Import Icons
-import FeatherIcon from "feather-icons-react";
+import FeatherIcon from "feather-icons-react"
 
 const BackToTop = () => {
     const toTop = () => {
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
-    };
+        document.body.scrollTop = 0
+        document.documentElement.scrollTop = 0
+    }
 
-    window.onscroll = function () { backToTopButton() };
+    window.onscroll = function () { backToTopButton() }
 
     function backToTopButton() {
         var ele = document.getElementById("back-to-top")
         if (ele) {
             if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-                ele.style.display = "block";
+                ele.style.display = "block"
             } else {
-                ele.style.display = "none";
+                ele.style.display = "none"
             }
         }
     }
@@ -33,7 +33,7 @@ const BackToTop = () => {
                 <FeatherIcon icon="arrow-up" className="icons" />
             </Link>
         </React.Fragment>
-    );
+    )
 }
 
-export default BackToTop;
+export default BackToTop

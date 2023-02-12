@@ -1,19 +1,19 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import React, { Component } from "react"
+import { Link } from "react-router-dom"
 //Import Switcher CSS
 
 class ThemeSwitcher extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       isSwitchToggle: false,
-    };
-    this.toggleSwitcher = this.toggleSwitcher.bind(this);
+    }
+    this.toggleSwitcher = this.toggleSwitcher.bind(this)
   }
 
   toggleSwitcher = () => {
-    this.setState({ isSwitchToggle: !this.state.isSwitchToggle });
-  };
+    this.setState({ isSwitchToggle: !this.state.isSwitchToggle })
+  }
 
 
   render() {
@@ -60,11 +60,11 @@ class ThemeSwitcher extends Component {
               <i className="mdi mdi-cog ms-1 mdi-24px position-absolute mdi-spin text-primary"></i>
             </Link>
           </div>
-        </div>      
+        </div>
 
       </React.Fragment>
-    );
+    )
   }
 }
 
-export default ThemeSwitcher;
+export default ThemeSwitcher

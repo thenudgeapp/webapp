@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 const Tagline = ({ children }) => {
     return <>
@@ -8,4 +8,4 @@ const Tagline = ({ children }) => {
     </>
 }
 
-export default Tagline;
+export default Tagline

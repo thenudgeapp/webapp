@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Col, Container, Form, Row } from "reactstrap";
 
 // import images
-import laptop from "../../assets/images/task/laptop.png";
+import nudgeAi from "../../assets/images/task/nudge-ai.png";
 
 export default class Section extends Component {
   render() {
@@ -18,37 +18,27 @@ export default class Section extends Component {
               <Col lg={12} className="text-center mt-0 mt-md-5 pt-0 pt-md-5">
                 <div className="title-heading margin-top-100">
                   <h1 className="heading text-white title-dark mb-3">
-                    A Better Way to Manage your Schedule
+                    The productivity tool that guides you to success
                   </h1>
                   <p className="para-desc mx-auto text-white-50">
-                    Launch your campaign and benefit from our expertise on
-                    designing and managing conversion centered bootstrap v5 html
-                    page.
+                    Stand out among your peers with AI-generated insights
+                    on your tasks and perform better.
+                    Built for Product Managers and Software Engineers.
                   </p>
                   <div className="text-center subcribe-form mt-4 pt-2">
-                    <Form>                    
-                        <input
-                          type="email"
-                          id="email"
-                          name="email"
-                          className="border rounded-pill"
-                          required
-                          placeholder="Email Address"
-                        />
-                        <button
-                          type="submit"
-                          className="btn btn-pills btn-primary"
-                        >
-                          Get Started
-                        </button>
-                    </Form>
+                    <div
+                        id="buyButton"
+                        className="btn btn-pills btn-soft-primary settingbtn"
+                    >
+                      Get Started
+                    </div>
                   </div>
                 </div>
 
                 <Row className="justify-content-center">
                   <Col lg={10} className="text-center">
                     <div className="home-dashboard">
-                      <img src={laptop} alt="" className="img-fluid" />
+                      <img src={nudgeAi} alt="" className="img-fluid" />
                     </div>
                   </Col>
                 </Row>

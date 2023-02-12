@@ -1,6 +1,6 @@
-import React from 'react';
-import { UncontrolledAlert } from "reactstrap";
-import { Link } from 'react-router-dom';
+import React from 'react'
+import { UncontrolledAlert } from "reactstrap"
+import { Link } from 'react-router-dom'
 
 const Popup = () => {
     return (
@@ -16,7 +16,7 @@ const Popup = () => {
             </UncontrolledAlert>
 
         </React.Fragment>
-    );
+    )
 }
 
-export default Popup;
+export default Popup

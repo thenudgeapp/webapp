@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { Col, Container, Row } from "reactstrap";
+import React, { Component } from "react"
+import { Link } from "react-router-dom"
+import { Col, Container, Row } from "reactstrap"
 
 //Import Icons
-import FeatherIcon from "feather-icons-react";
+import FeatherIcon from "feather-icons-react"
 
 export default class Price extends Component {
   render() {
@@ -50,46 +50,46 @@ export default class Price extends Component {
                 <div className="pricing-features text-start p-4">
                   <h5>What's included:</h5>
                   <ul className="feature list-unstyled mb-0">
-                    <li className="text-muted">                      
+                    <li className="text-muted">
                         <FeatherIcon
                           icon="arrow-right"
                           className="fea icon-sm text-dark me-2"
-                        />                  
+                        />
                       Full Access
                     </li>
-                    <li className="text-muted mt-2">                     
+                    <li className="text-muted mt-2">
                         <FeatherIcon
                           icon="arrow-right"
                           className="fea icon-sm text-dark me-2"
-                        />                  
+                        />
                       Enhanced Security
                     </li>
-                    <li className="text-muted mt-2">                    
+                    <li className="text-muted mt-2">
                         <FeatherIcon
                           icon="arrow-right"
                           className="fea icon-sm text-dark me-2"
-                        />                   
+                        />
                       Source Files
                     </li>
-                    <li className="text-muted mt-2">                     
+                    <li className="text-muted mt-2">
                         <FeatherIcon
                           icon="arrow-right"
                           className="fea icon-sm text-dark me-2"
-                        />                  
+                        />
                       1 Domain Free
                     </li>
-                    <li className="text-muted mt-2">                    
+                    <li className="text-muted mt-2">
                         <FeatherIcon
                           icon="arrow-right"
                           className="fea icon-sm text-dark me-2"
-                        />                   
+                        />
                       Free Appointments
                     </li>
-                    <li className="text-muted mt-2">                    
+                    <li className="text-muted mt-2">
                         <FeatherIcon
                           icon="arrow-right"
                           className="fea icon-sm text-dark me-2"
-                        />                  
+                        />
                       Free Installment
                     </li>
                   </ul>
@@ -120,46 +120,46 @@ export default class Price extends Component {
                 <div className="pricing-features text-start p-4">
                   <h5>What's included:</h5>
                   <ul className="feature list-unstyled mb-0">
-                    <li className="text-muted">                     
+                    <li className="text-muted">
                         <FeatherIcon
                           icon="arrow-right"
                           className="fea icon-sm icon me-2"
-                        />                   
+                        />
                       Full Access
                     </li>
-                    <li className="text-muted mt-2">                     
+                    <li className="text-muted mt-2">
                         <FeatherIcon
                           icon="arrow-right"
                           className="fea icon-sm icon me-2"
-                        />                    
+                        />
                       Enhanced Security
                     </li>
-                    <li className="text-muted mt-2">                    
+                    <li className="text-muted mt-2">
                         <FeatherIcon
                           icon="arrow-right"
                           className="fea icon-sm icon me-2"
-                        />                    
+                        />
                       Source Files
                     </li>
-                    <li className="text-muted mt-2">                     
+                    <li className="text-muted mt-2">
                         <FeatherIcon
                           icon="arrow-right"
                           className="fea icon-sm icon me-2"
-                        />                    
+                        />
                       1 Domain Free
                     </li>
-                    <li className="text-muted mt-2">                     
+                    <li className="text-muted mt-2">
                         <FeatherIcon
                           icon="arrow-right"
                           className="fea icon-sm icon me-2"
-                        />                     
+                        />
                       Free Appointments
                     </li>
-                    <li className="text-muted mt-2">                      
+                    <li className="text-muted mt-2">
                         <FeatherIcon
                           icon="arrow-right"
                           className="fea icon-sm icon me-2"
-                        />                     
+                        />
                       Free Installment
                     </li>
                   </ul>
@@ -188,46 +188,46 @@ export default class Price extends Component {
                 <div className="pricing-features text-start p-4">
                   <h5>What's included:</h5>
                   <ul className="feature list-unstyled mb-0">
-                    <li className="text-muted">                    
+                    <li className="text-muted">
                         <FeatherIcon
                           icon="arrow-right"
                           className="fea icon-sm text-dark me-2"
-                        />                    
+                        />
                       Full Access
                     </li>
-                    <li className="text-muted mt-2">                     
+                    <li className="text-muted mt-2">
                         <FeatherIcon
                           icon="arrow-right"
                           className="fea icon-sm text-dark me-2"
-                        />                     
+                        />
                       Enhanced Security
                     </li>
-                    <li className="text-muted mt-2">                   
+                    <li className="text-muted mt-2">
                         <FeatherIcon
                           icon="arrow-right"
                           className="fea icon-sm text-dark me-2"
-                        />                    
+                        />
                       Source Files
                     </li>
-                    <li className="text-muted mt-2">                    
+                    <li className="text-muted mt-2">
                         <FeatherIcon
                           icon="arrow-right"
                           className="fea icon-sm text-dark me-2"
-                        />                    
+                        />
                       1 Domain Free
                     </li>
-                    <li className="text-muted mt-2">                   
+                    <li className="text-muted mt-2">
                         <FeatherIcon
                           icon="arrow-right"
                           className="fea icon-sm text-dark me-2"
-                        />                     
+                        />
                       Free Appointments
                     </li>
-                    <li className="text-muted mt-2">                    
+                    <li className="text-muted mt-2">
                         <FeatherIcon
                           icon="arrow-right"
                           className="fea icon-sm text-dark me-2"
-                        />                     
+                        />
                       Free Installment
                     </li>
                   </ul>
@@ -237,6 +237,6 @@ export default class Price extends Component {
           </Row>
         </Container>
       </React.Fragment>
-    );
+    )
   }
 }
