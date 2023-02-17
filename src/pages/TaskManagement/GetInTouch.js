@@ -16,7 +16,7 @@ export default class GetInTouch extends Component {
                 <h4 className="title mb-4">What’s your goal?</h4>
                 <p className="text-muted para-desc mx-auto mb-0">
                   <span className="text-primary fw-bold">
-                    10%+ increase
+                    10% increase
                   </span>{" "}
                    in conversation rate, fix a bug, or{" "}
                   <span className="text-primary fw-bold">

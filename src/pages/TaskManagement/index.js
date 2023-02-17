@@ -45,7 +45,7 @@ export default class index extends Component {
     return (
       <React.Fragment>
         <Section />
-        <section className="section mt-0 mt-md-5">
+        <section className="section mt-0">
           <Features />
           <Timeline />
           <GreatFeatures />

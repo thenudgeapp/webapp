@@ -20,7 +20,7 @@
 // @import './assets/scss/style-dark.scss';
 
 //features scss
-@import "./assets/scss/features"; 
+@import "./assets/scss/features";
 
 // drawer
 .react-drawer-drawer {
@@ -127,5 +127,19 @@
   .btn-close {
     top: 17px;
     right: 17px;
+  }
+}
+
+.icon-spinner {
+  animation: spin-animation 1.0s infinite;
+  display: inline-block;
+}
+
+@keyframes spin-animation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }

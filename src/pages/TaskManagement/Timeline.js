@@ -13,12 +13,12 @@ export default class Timeline extends Component {
   render() {
     return (
       <React.Fragment>
-        <Container className="mt-100 mt-60">
+        <Container className="mt-60" style={{marginTop: "60px"}}>
           <Row className="align-items-center">
             <Col lg={6} md={6}>
               <img
                 src={taskManagement}
-                className="img-fluid shadow rounded-md"
+                className="img-fluid"
                 alt=""
               />
             </Col>
@@ -69,7 +69,7 @@ export default class Timeline extends Component {
             <Col lg={6} md={6}>
               <img
                   src={personalized}
-                  className="img-fluid shadow rounded-md"
+                  className="img-fluid"
                   alt=""
               />
             </Col>
