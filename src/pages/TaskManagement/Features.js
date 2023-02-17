@@ -10,10 +10,10 @@ export default class Features extends Component {
           <div className="row">
             <Col lg={12} className="text-center mt-0 pt-0">
               <div className="title-heading">
-                <h1 className="heading text-dark title-light mb-3">
+                <h1 className="heading title-light mb-3">
                   Get 3X better with Nudge
                 </h1>
-                <p className="para-desc mx-auto text-dark-50">
+                <p className="mx-auto text-muted">
                   It is easy to miss key tasks in your planning phase. No worries, we’ve got you!
                 </p>
               </div>

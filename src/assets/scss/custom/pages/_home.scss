@@ -241,10 +241,10 @@
         width: 70%;
         height: 100%;
         background: rgba($animation-bg, 0.85);
-        clip-path: polygon(0 0, 90% 0, 70% 100%, 0% 100%);
 
         @media (max-width: 767px) {
             width: 100%;
+            clip-path: polygon(0 0, 90% 0, 70% 100%, 0% 100%);
             clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
         }
     }
@@ -257,14 +257,18 @@
         &:after {
             background: $primary;
             width:80%;
-            clip-path: polygon(0 0, 100% 0, 50% 100%, 0% 100%);
+            @media (max-width: 767px) {
+                clip-path: polygon(0 0, 100% 0, 50% 100%, 0% 100%);
+            }
         }
     }
     &.task-management-home {
         &:after {
             background: url("../../../images/task/bg.png") $primary;
             width:100%;
-            clip-path: circle(65% at 40% 25%);
+            @media (max-width: 767px) {
+                clip-path: circle(65% at 40% 25%);
+            }
         }
     }
 }

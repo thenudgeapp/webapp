@@ -43,20 +43,17 @@ class Footer5 extends Component {
 
             <div className="footer-py-30 footer-bar bg-footer">
               <Container className="text-center">
-                <Row className="align-items-center justify-content-between">
-                  <Col lg={3} md={2} sm={3}>
-                    <div className="text-sm-start">
-                      <Link to="#" className="logo-footer">
-                        <img src={icon} height="34" alt="" />
-                      </Link>
-                    </div>
-                  </Col>
-
+                <Row className="align-items-center justify-content-between pl-5 pr-5">
                   <Col lg={6} md={6} sm={6} className="mt-4 mt-sm-0 pt-2 pt-sm-0">
                     <ul className="list-unstyled footer-list terms-service mb-0" style={{
                       display: "flex",
                       justifyContent: "space-between"
                     }}>
+                      <li className="text-sm-start">
+                        <Link to="#" className="logo-footer">
+                          <img src={icon} height="34" alt="" />
+                        </Link>
+                      </li>
                       <li className="list-inline-item mb-0"><Link to="#" className="text-foot">Contact Us</Link></li>{" "}
                       <li className="list-inline-item mb-0"><Link to="#" className="text-foot me-2">Privacy</Link></li>{" "}
                       <li className="list-inline-item mb-0"><Link to="#" className="text-foot me-2">Terms</Link></li>{" "}
