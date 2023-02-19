@@ -3,6 +3,7 @@ import { Col, Container, Form, Row } from "reactstrap";
 
 // import images
 import nudgeAi from "../../assets/images/task/nudge-ai.png";
+import {Link} from "react-router-dom";
 
 export default class Section extends Component {
   render() {
@@ -26,12 +27,12 @@ export default class Section extends Component {
                     Built for Product Managers and Software Engineers.
                   </p>
                   <div className="text-center subcribe-form mt-4 pt-2">
-                    <div
+                    <Link to='/register'
                         id="buyButton"
                         className="btn btn-pills btn-soft-primary settingbtn"
                     >
                       Get Started
-                    </div>
+                    </Link>
                   </div>
                 </div>
 

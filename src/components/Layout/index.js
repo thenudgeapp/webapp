@@ -6,7 +6,7 @@ import BackToTop from "./backToTop"
 
 
 // Layout Components
-const Topbar = React.lazy(() => import("./Topbar"))
+const Topbar = React.lazy(() => import("./TopbarWrapper"))
 const NavbarPage = React.lazy(() =>
   import("../../pages/Saas Onepage/NavbarPage")
 )
@@ -70,7 +70,9 @@ class Layout extends Component {
           {this.props.location.pathname === "/index-onepage" ? (
             <NavbarPage />
           ) : (
-            <Topbar tagline={tagLineContent} hasDarkTopBar={this.props.hasDarkTopBar} />
+            <Suspense fallback={<span />}>
+              <Topbar tagline={tagLineContent} hasDarkTopBar={this.props.hasDarkTopBar} />
+            </Suspense>
           )}
 
           {this.props.children}

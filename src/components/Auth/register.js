@@ -16,15 +16,14 @@ import { Link } from "react-router-dom";
 // Formik Validation
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import ThemeSwitcher from "../../../components/Layout/ThemeSwitcher";
 //Import Icons
 import FeatherIcon from "feather-icons-react";
 import {useAtom} from "jotai";
-import {AuthAtoms} from "../../../store";
+import {AuthAtoms} from "../../store";
 import {HttpStatusCode} from "axios";
 import { useHistory } from 'react-router-dom'
 
-const PageSignupThree = () => {
+const Register = () => {
   const history = useHistory()
   const [_, register] = useAtom(AuthAtoms.register)
   const [user, __] = useAtom(AuthAtoms.user)
@@ -90,8 +89,7 @@ const PageSignupThree = () => {
     <React.Fragment>
       <div className="back-to-home rounded d-none d-sm-block">
         <Link
-          to="
-          /index"
+          to="/index"
           className="btn btn-icon btn-primary"
         >
           <i>
@@ -194,6 +192,7 @@ const PageSignupThree = () => {
                             type="email"
                             className="form-control ps-5"
                             placeholder="Email"
+                            autoComplete="username"
                             name="email"
                             onChange={validation.handleChange}
                             onBlur={validation.handleBlur}
@@ -225,6 +224,7 @@ const PageSignupThree = () => {
                             className="form-control ps-5"
                             name="password"
                             placeholder="Password"
+                            autoComplete="current-password"
                             onChange={validation.handleChange}
                             onBlur={validation.handleBlur}
                             value={validation.values.password || ""}
@@ -420,4 +420,4 @@ const PageSignupThree = () => {
   );
 }
 
-export default PageSignupThree;
+export default Register;
