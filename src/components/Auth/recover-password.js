@@ -16,14 +16,13 @@ import {Link, useParams} from "react-router-dom";
 //Formik Validation
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import ThemeSwitcher from "../../../components/Layout/ThemeSwitcher";
 //Import Icons
 import FeatherIcon from "feather-icons-react";
 import {useAtom} from "jotai";
-import {AuthAtoms} from "../../../store";
+import {AuthAtoms} from "../../store";
 import {HttpStatusCode} from "axios";
 
-const PageRePasswordThree = () => {
+const RecoverPassword = () => {
 
   const [_, handleForgotPassword] = useAtom(AuthAtoms.forgotPassword)
   const [__, resetPassword] = useAtom(AuthAtoms.resetPassword)
@@ -319,4 +318,4 @@ const PageRePasswordThree = () => {
   );
 };
 
-export default PageRePasswordThree;
+export default RecoverPassword;

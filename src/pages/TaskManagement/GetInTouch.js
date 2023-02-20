@@ -31,7 +31,7 @@ export default class GetInTouch extends Component {
                   today, and let’s set you on a path to success.
                 </p>
                 <Link
-                  to="#"
+                  to="/register"
                   className="btn btn-primary mt-4"
                 >
                   Get Started

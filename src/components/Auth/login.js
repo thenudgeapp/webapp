@@ -15,15 +15,14 @@ import { Link } from "react-router-dom";
 
 //Import Icons
 import FeatherIcon from "feather-icons-react";
-import ThemeSwitcher from "../../../components/Layout/ThemeSwitcher";
 // Formik Validation
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import {useAtom} from "jotai";
-import {AuthAtoms} from "../../../store";
+import {AuthAtoms} from "../../store";
 import { useHistory } from 'react-router-dom'
 
-const PageLoginThree = () => {
+const Login = () => {
   const history = useHistory()
   const [user, _] = useAtom(AuthAtoms.user)
   const [__, login] = useAtom(AuthAtoms.login)
@@ -107,6 +106,7 @@ const PageLoginThree = () => {
                             className="form-control ps-5"
                             name="email"
                             id="email"
+                            autoComplete="username"
                             placeholder="Email"
                             onChange={validation.handleChange}
                             onBlur={validation.handleBlur}
@@ -139,6 +139,7 @@ const PageLoginThree = () => {
                             className="form-control ps-5"
                             name="password"
                             id="password"
+                            autoComplete="current-password"
                             placeholder="Password"
                             onChange={validation.handleChange}
                             onBlur={validation.handleBlur}
@@ -237,4 +238,4 @@ const PageLoginThree = () => {
   );
 }
 
-export default PageLoginThree;
+export default Login;

@@ -38,6 +38,7 @@ import job from '../../assets/images/demo/job.png'
 import forums from '../../assets/images/demo/forums.png'
 import blog from '../../assets/images/demo/blog.png'
 import nft from "../../assets/images/demo/nft.png"
+import user from "../../assets/images/account/user.png";
 import RightSidebar from './RightSidebar'
 
 // menu
@@ -248,31 +249,54 @@ class Topbar extends Component {
             </div>
             {(() => {
                 return (
-                  <ul className="buy-button list-inline mb-0">
-                    <li className="list-inline-item mb-0">
-                      <Link
-                        to="#" disabled={this.state.open}
-                      >
-                        <div
-                          id="buyButton"
-                          className="btn btn-pills btn-soft-primary settingbtn"
-                        >
-                          Get Started
-                        </div>
-                      </Link>
-                    </li>{" "}
 
-                    <li className="list-inline-item ps-1 mb-0">
-                      <Link
-                        to="#"
-                        rel="noreferrer"
-                      >
-                        <div id="buyButton" className="btn btn-pills shoppingbtn">
-                          Login
-                        </div>
-                      </Link>
-                    </li>
-                  </ul>
+                      <ul className="buy-button list-inline mb-0">
+                        {
+                          !this.props.user ?
+                            <>
+                              <li className="list-inline-item mb-0">
+                                <Link
+                                    to="/register" disabled={this.state.open}
+                                >
+                                  <div
+                                      id="buyButton"
+                                      className="btn btn-pills settingbtn btn-light"
+                                  >
+                                    Get Started
+                                  </div>
+                                </Link>
+                              </li>{" "}
+
+                              <li className="list-inline-item ps-1 mb-0">
+                                <Link
+                                    to="/login"
+                                    rel="noreferrer"
+                                >
+                                  <div id="buyButton" className="btn btn-pills shoppingbtn btn-light">
+                                    Login
+                                  </div>
+                                </Link>
+                              </li>
+                            </> :
+                              <>
+                                <li className="list-inline-item ps-1 mb-0">
+                                  <Link
+                                      to={'/home'}>
+                                    <div className="btn btn-pills shoppingbtn btn-light">
+                                      <img src={user} className="avatar avatar-ex-sm rounded-circle shadow" alt="" />
+                                      <span> Hi, Patrick </span>
+                                    </div>
+                                  </Link>
+                                </li>
+                                <li className="list-inline-item ps-1 mb-0">
+                                  <div onClick={() => this.props.logout({refreshToken: this.props.tokens.refresh.token})} className="btn btn-pills shoppingbtn btn-light">
+                                    <span> Logout </span>
+                                  </div>
+                                </li>
+                              </>
+
+                        }
+                      </ul>
                 )
             })()}
 

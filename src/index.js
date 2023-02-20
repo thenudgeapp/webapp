@@ -4,13 +4,16 @@ import App from "./App"
 // import * as serviceWorker from "./serviceWorker"
 import { BrowserRouter } from "react-router-dom"
 import reportWebVitals from './reportWebVitals'
+import {Provider} from 'jotai'
 
 const root = ReactDOM.createRoot(document.getElementById("root"))
 root.render(
   <React.Fragment>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <Provider>
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+    </Provider>
   </React.Fragment>
 )
 
