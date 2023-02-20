@@ -51,7 +51,7 @@ const VerifyEmail = () => {
   return (
     <React.Fragment>
       <div className="back-to-home">
-        <Link to="index" className="back-button btn btn-icon btn-primary">
+        <Link to="/" className="back-button btn btn-icon btn-primary">
           <i>
             <FeatherIcon icon="arrow-left" className="icons" />
           </i>

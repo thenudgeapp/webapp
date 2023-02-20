@@ -89,7 +89,7 @@ const Register = () => {
     <React.Fragment>
       <div className="back-to-home rounded d-none d-sm-block">
         <Link
-          to="/index"
+          to="/"
           className="btn btn-icon btn-primary"
         >
           <i>

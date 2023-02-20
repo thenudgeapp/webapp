@@ -42,12 +42,12 @@ const routes = [
     isWithoutLayout: true,
   },
   //Index Main
-  {
+  /*{
     path: "/",
     exact: true,
     component: () => <Redirect to="/index" />,
-  },
-  { path: "/index", component: Main, isTopbarDark: false },
+  },*/
+  { path: "/", component: Main, isTopbarDark: false },
 ]
 
 export default routes
