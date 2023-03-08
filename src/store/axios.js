@@ -12,7 +12,7 @@ const AxiosClient = async (protectedRequest = false) => {
             const tokens = localStorage.getItem(TOKEN_DATA);
             if (tokens) {
                 const tokensJson = JSON.parse(tokens)
-                config.headers.Authorization =  token ? `Bearer ${tokensJson.access.token}` : '';
+                config.headers.Authorization =  tokensJson ? `Bearer ${tokensJson.access.token}` : '';
             }
             return config;
         });

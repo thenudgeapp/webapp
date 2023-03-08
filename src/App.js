@@ -7,28 +7,54 @@ import {
   withRouter,
 } from "react-router-dom"
 
-// Import Css
-import "./assets/css/materialdesignicons.min.css"
-import "./Apps.scss"
-
 // import "./assets/css/colors/default.css"
 
 // Include Routes
 import routes from "./routes/allRoutes"
 
+// @mui material components
+import { ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import Icon from "@mui/material/Icon";
+
+// Material Dashboard 2 React themes
+import theme from "./theme";
+import {CacheProvider} from "@emotion/react";
+import Sidenav from "./components/Shared/Sidenav";
+import DashboardLayout from "./components/Layout/DashboardLayout";
+import DashboardNavbar from "./components/Shared/DashboardNavbar";
+import AppNoAuth from "./AppNoAuth";
+import ThemeLayoutWrapper from "./components/Layout/ThemeLayoutWrapper";
+
 function withLayout(WrappedComponent, hasDarkTopBar) {
-  // ...and returns another component...
-  /* eslint-disable react/display-name */
-  return class extends React.Component {
-    render() {
-      return (
-        <Layout hasDarkTopBar={hasDarkTopBar}>
-          <WrappedComponent></WrappedComponent>
-        </Layout>
-      )
+    // ...and returns another component...
+    /* eslint-disable react/display-name */
+    return class extends React.Component {
+        render() {
+            return (
+                <AppNoAuth>
+                    <Layout hasDarkTopBar={hasDarkTopBar}>
+                        <WrappedComponent></WrappedComponent>
+                    </Layout>
+                </AppNoAuth>
+            )
+        }
     }
-  }
 }
+
+function withoutLayout(WrappedComponent) {
+    // ...and returns another component...
+    /* eslint-disable react/display-name */
+    return class extends React.Component {
+        render() {
+            return (
+                <WrappedComponent></WrappedComponent>
+            )
+        }
+    }
+}
+
+
 
 class App extends Component {
   Loader = () => {
@@ -50,11 +76,17 @@ class App extends Component {
           <Suspense fallback={this.Loader()}>
             <Switch>
               {routes.map((route, idx) =>
-                route.isWithoutLayout ? (
+                route.isWithoutLayout ? route.noAuth ? (
+                        <Route
+                            path={route.path}
+                            exact={route.exact}
+                            component={route.component}
+                            key={idx}
+                        />) : (
                   <Route
                     path={route.path}
                     exact={route.exact}
-                    component={route.component}
+                    component={() => <ThemeLayoutWrapper view={() => route.component()}/>}
                     key={idx}
                   />
                 ) : (

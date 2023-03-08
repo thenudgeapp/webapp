@@ -17,6 +17,9 @@ import client6 from "../../assets/images/client/06.jpg";
 import client7 from "../../assets/images/client/07.jpg";
 import client8 from "../../assets/images/client/08.jpg";
 
+import logo from "../../assets/img/logo.svg"
+import avMale4 from "../../assets/img/avatar-male-4.jpg"
+
 class Layout extends Component {
   state = {
     members: [
@@ -155,76 +158,7 @@ class Layout extends Component {
   render() {
     return (
       <React.Fragment>
-        <section className="section mt-60">
-          <Container className="mt-lg-3">
-            <Row>
-              <Col lg="3" md="6" xs="12" className="d-lg-block d-none">
-                <div className="sidebar sticky-bar p-4 rounded shadow">
-                </div>
-              </Col>
-              <Col lg={3} xs={12}>
-                <div className="rounded shadow p-4">
-                  <Card className="shadow rounded border-0 overflow-hidden mb-3">
-                    <Row className="g-0">
-                      <div className="col-md-12 mx-auto">
-                        <CardBody>
-                        </CardBody>
-                      </div>
-                    </Row>
-                  </Card>
-                  <Card className="shadow rounded border-0 overflow-hidden mb-3">
-                    <Row className="g-0">
-                      <div className="col-md-12 mx-auto">
-                        <CardBody>
-                        </CardBody>
-                      </div>
-                    </Row>
-                  </Card>
-                </div>
-              </Col>
-              <Col lg={3} xs={12}>
-                <div className="rounded shadow p-4">
-                  <Card className="shadow rounded border-0 overflow-hidden mb-3">
-                    <Row className="g-0">
-                      <div className="col-md-12 mx-auto">
-                        <CardBody>
-                        </CardBody>
-                      </div>
-                    </Row>
-                  </Card>
-                </div>
-              </Col>
-              <Col lg={3} xs={12}>
-                <div className="rounded shadow p-4">
-                  <Card className="shadow rounded border-0 overflow-hidden mb-3">
-                    <Row className="g-0">
-                      <div className="col-md-12 mx-auto">
-                        <CardBody>
-                        </CardBody>
-                      </div>
-                    </Row>
-                  </Card>
-                  <Card className="shadow rounded border-0 overflow-hidden mb-3">
-                    <Row className="g-0">
-                      <div className="col-md-12 mx-auto">
-                        <CardBody>
-                        </CardBody>
-                      </div>
-                    </Row>
-                  </Card>
-                  <Card className="shadow rounded border-0 overflow-hidden mb-3">
-                    <Row className="g-0">
-                      <div className="col-md-12 mx-auto">
-                        <CardBody>
-                        </CardBody>
-                      </div>
-                    </Row>
-                  </Card>
-                </div>
-              </Col>
-            </Row>
-          </Container>
-        </section>
+
       </React.Fragment>
     );
   }
