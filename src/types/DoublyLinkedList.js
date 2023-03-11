@@ -132,4 +132,4 @@ class DoublyLinkedList {
   }
 }
 
-module.exports = DoublyLinkedList
+export default DoublyLinkedList
