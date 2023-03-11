@@ -4,6 +4,8 @@ import {atomWithStorage} from "jotai/utils"
 import {TOKEN_DATA, USER_DATA} from "../config/constants";
 import AxiosClient from "./axios";
 import AxiosClientNoAuth from "./axios-no-auth";
+import {backlogTasks, doneTasks, subTasks, tasks, todoTasks} from "./task";
+
 const LOGIN_URL = `/v1/auth/login`
 const REGISTER_URL = `/v1/auth/register`
 const REFRESH_TOKEN_URL = `/v1/auth/refresh-tokens`
@@ -13,123 +15,135 @@ const SEND_VERIFY_EMAIL_URL = `/v1/auth/send-verification-email`
 const VERIFY_EMAIL_URL = `/v1/auth/verify-email`
 
 export const tokens = atomWithStorage(TOKEN_DATA, null)
-export const user = atomWithStorage(USER_DATA, null)
+export const user = atomWithStorage(USER_DATA, localStorage.getItem(USER_DATA))
 export const isLoggedIn = atom(!!user.read)
 export const sendResetPassword = atom(false)
 export const sendForgotPassword = atom(false)
 export const sendVerifyEmail = atom(false)
 export const verifyEmail = atom(false)
 
-console.log(AxiosClient())
-
 export const login =
-  atom((get) => get(isLoggedIn),
-      async (_get, set, {email, password}) => {
-        const response = await AxiosClientNoAuth().post(LOGIN_URL, { email, password })
-        if (response.status === HttpStatusCode.Ok) {
-          set(isLoggedIn, !!response.data.user )
-          set(user, response.data.user)
-          set(tokens, response.data.tokens)
-        }
+    atom((get) => get(isLoggedIn),
+        async (_get, set, {email, password}) => {
+            const response = await AxiosClientNoAuth().post(LOGIN_URL, {email, password})
+            if (response.status === HttpStatusCode.Ok) {
+                set(isLoggedIn, !!response.data.user)
+                set(user, response.data.user)
+                set(tokens, response.data.tokens)
+            }
 
-        return response
-      }
-  )
+            return response
+        }
+    )
 
 export const refreshTokenFn =
     atom((get) => get(tokens),
-        async (_get, set, { refreshToken }) => {
-          const response = await AxiosClientNoAuth().post(REFRESH_TOKEN_URL, { refreshToken })
-          if (response.status === HttpStatusCode.Ok) {
-            set(isLoggedIn, true )
-            set(tokens, response.data)
-            return response
-          }
+        async (_get, set, {refreshToken}) => {
+            const response = await AxiosClientNoAuth().post(REFRESH_TOKEN_URL, {refreshToken})
+            if (response.status === HttpStatusCode.Ok) {
+                set(isLoggedIn, true)
+                set(tokens, response.data)
+                return response
+            }
 
-          clearData(set)
-          return response
+            clearData(set)
+            return response
         }
     )
 
 export const logout =
     atom((get) => get(isLoggedIn),
-        async (_get, set, { refreshToken }) => {
-          const response = await AxiosClientNoAuth().post(REFRESH_TOKEN_URL, { refreshToken })
-          clearData(set)
+        async (_get, set, {refreshToken}) => {
+            const response = await AxiosClientNoAuth().post(REFRESH_TOKEN_URL, {refreshToken})
+            clearData(set)
 
-          return response
+            return response
         }
     )
 
 export const register =
     atom((get) => get(isLoggedIn),
         async (_get, set, {firstName, lastName, email, password, jobRole, workLevel, companyIndustry, companySize}) => {
-          const response = await AxiosClientNoAuth().post(REGISTER_URL, { firstName, lastName, email, password, jobRole, workLevel, companyIndustry, companySize })
+            const response = await AxiosClientNoAuth().post(REGISTER_URL, {
+                firstName,
+                lastName,
+                email,
+                password,
+                jobRole,
+                workLevel,
+                companyIndustry,
+                companySize
+            })
 
-          if (response.status === HttpStatusCode.Created) {
-            set(isLoggedIn, !!response.data.user )
-            set(user, response.data.user)
-            set(tokens, response.data.tokens)
-          }
+            if (response.status === HttpStatusCode.Created) {
+                set(isLoggedIn, !!response.data.user)
+                set(user, response.data.user)
+                set(tokens, response.data.tokens)
+            }
 
-          return response
+            return response
         }
     )
 
 export const resetPassword =
     atom((get) => get(sendResetPassword),
-        async (_get, set, { token, password }) => {
-          const response = await AxiosClientNoAuth().post(`${RESET_PASSWORD_URL}?token=${token}`, { password })
+        async (_get, set, {token, password}) => {
+            const response = await AxiosClientNoAuth().post(`${RESET_PASSWORD_URL}?token=${token}`, {password})
 
-          if (response.status === HttpStatusCode.NoContent) {
-            set(sendResetPassword, true)
-          }
+            if (response.status === HttpStatusCode.NoContent) {
+                set(sendResetPassword, true)
+            }
 
-          return response
+            return response
         }
     )
 
 export const forgotPassword =
     atom((get) => get(sendForgotPassword),
-        async (_get, set, { email }) => {
-          const response = await AxiosClientNoAuth().post(FORGOT_PASSWORD_URL, { email })
+        async (_get, set, {email}) => {
+            const response = await AxiosClientNoAuth().post(FORGOT_PASSWORD_URL, {email})
 
-          if (response.status === HttpStatusCode.NoContent) {
-            set(sendForgotPassword, true)
-          }
+            if (response.status === HttpStatusCode.NoContent) {
+                set(sendForgotPassword, true)
+            }
 
-          return response
+            return response
         }
     )
 
 export const sendVerifyEmailRequest =
     atom((get) => get(sendVerifyEmail),
-        async (_get, set, { email }) => {
-          const response = await (await AxiosClient(true)).post(SEND_VERIFY_EMAIL_URL)
+        async (_get, set, {email}) => {
+            const response = await (await AxiosClient(true)).post(SEND_VERIFY_EMAIL_URL)
 
-          if (response.status === HttpStatusCode.NoContent) {
-            set(sendVerifyEmail, true)
-          }
+            if (response.status === HttpStatusCode.NoContent) {
+                set(sendVerifyEmail, true)
+            }
 
-          return response
+            return response
         }
     )
 
 export const verifyEmailRequest =
     atom((get) => get(verifyEmail),
-        async (_get, set, { token }) => {
-          const response = await AxiosClientNoAuth().post(`${VERIFY_EMAIL_URL}?token=${token}`)
+        async (_get, set, {token}) => {
+            const response = await AxiosClientNoAuth().post(`${VERIFY_EMAIL_URL}?token=${token}`)
 
-          if (response.status === HttpStatusCode.NoContent) {
-            set(verifyEmail, true)
-          }
+            if (response.status === HttpStatusCode.NoContent) {
+                set(verifyEmail, true)
+            }
 
-          return response
+            return response
         }
     )
 
-const clearData = (set) => {
-  set(isLoggedIn, false )
-  set(tokens, null)
-  set(user, null)
+export const clearData = (set) => {
+    set(isLoggedIn, false)
+    set(tokens, null)
+    set(user, null)
+    set(tasks, {results: [] })
+    set(backlogTasks, {results: [] })
+    set(todoTasks, {results: [] })
+    set(doneTasks, {results: [] })
+    set(subTasks, {results: [] })
 }
