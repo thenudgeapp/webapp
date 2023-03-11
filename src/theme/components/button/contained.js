@@ -20,14 +20,14 @@ import typography from "../../base/typography";
 // Material Dashboard 2 React Helper Functions
 import pxToRem from "../../functions/pxToRem";
 
-const { white, text, info, secondary } = colors;
+const { white, text, textButton, info, secondary, fadedButton } = colors;
 const { size } = typography;
 
 const contained = {
   base: {
     backgroundColor: white.main,
     minHeight: pxToRem(40),
-    color: text.main,
+    color: textButton.main,
     padding: `${pxToRem(10)} ${pxToRem(24)}`,
 
     "&:hover": {
@@ -84,6 +84,18 @@ const contained = {
 
     "&:focus:not(:hover)": {
       backgroundColor: secondary.focus,
+    },
+  },
+
+  fadedButton: {
+    backgroundColor: fadedButton.main,
+
+    "&:hover": {
+      backgroundColor: fadedButton.main,
+    },
+
+    "&:focus:not(:hover)": {
+      backgroundColor: fadedButton.focus,
     },
   },
 };

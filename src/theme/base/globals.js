@@ -36,6 +36,10 @@ const globals = {
   "a.link:hover, .link:hover, a.link:focus, .link:focus": {
     color: `${info.main} !important`,
   },
+  ".public-DraftStyleDefault-block, .public-DraftStyleDefault-ltr": {
+    maxHeight: 'calc(50vh - 120px)',
+    overflow: 'auto',
+  }
 };
 
 export default globals;

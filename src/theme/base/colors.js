@@ -24,9 +24,14 @@ const colors = {
     default: "#f0f2f5",
   },
 
+  textButton: {
+    main: "#f0f2f5",
+    focus: "#f0f2f5",
+  },
+
   text: {
-    main: "#7b809a",
-    focus: "#7b809a",
+    main: "rgba(0, 0, 0, 0.6)",
+    focus: "#f0f2f5",
   },
 
   transparent: {
@@ -47,6 +52,12 @@ const colors = {
   primary: {
     main: "#2f55d4",
     focus: "#2f55d4",
+  },
+
+  fadedButton: {
+    main: '#091e420a!important',
+    focus: '#6c757d',
+    contrastText: '#666!important',
   },
 
   secondary: {

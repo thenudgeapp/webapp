@@ -14,7 +14,7 @@ import DoublyLinkedList from "../types/DoublyLinkedList";
 
 const TASKS_URL = '/v1/tasks/'
 
-const buildQueryString = (name, status, limit = -1, sortBy = 'position:asc', page = 0) => {
+const buildQueryString = (name, status, parentId=undefined, limit = -1, sortBy = 'position:asc', page = 0) => {
     let queryString = `limit=${limit}&sortBy=${sortBy}&page=${page}`;
 
     if (name) {
@@ -23,6 +23,10 @@ const buildQueryString = (name, status, limit = -1, sortBy = 'position:asc', pag
 
     if (status) {
         queryString += `&status=${status}`
+    }
+
+    if (parentId) {
+        queryString += `&parentId=${parentId}`
     }
 
     return queryString
@@ -34,6 +38,7 @@ export const backlogTasks = atomWithStorage(TASKS_DATA_BACKLOG, JSON.parse(local
 export const todoTasks = atomWithStorage(TASKS_DATA_TODO, JSON.parse(localStorage.getItem(TASKS_DATA_TODO) || '{"results": [] }'));
 export const inProgressTasks = atomWithStorage(TASKS_DATA_IN_PROGRESS, JSON.parse(localStorage.getItem(TASKS_DATA_IN_PROGRESS) || '{"results": [] }'));
 export const doneTasks = atomWithStorage(TASKS_DATA_DONE, JSON.parse(localStorage.getItem(TASKS_DATA_DONE) || '{"results": [] }'));
+export const subTasks = atom({results: []})
 
 export const getAllTasks =
     atom((get) => get(tasks),
@@ -155,12 +160,38 @@ export const getDoneTasks =
         }
     )
 
+export const getSubTasks =
+    atom((get) => get(subTasks),
+        async (_get, set, {name, status, limit, sortBy, page, parentId}) => {
+            (await AxiosClient(true)).get(`${TASKS_URL}?${buildQueryString(name, status=undefined, parentId)}`).then((response) => {
+                if (response.status === HttpStatusCode.Ok) {
+                    let data = response.data
+                    set(subTasks, data)
+                }
+
+                if (response.status === HttpStatusCode.Unauthorized) {
+                    AuthAtoms.clearData(set)
+                }
+
+                return response
+            }).catch(error => {
+                if (error.response && error.response.status === HttpStatusCode.Unauthorized) {
+                    AuthAtoms.clearData(set)
+                }
+
+                return error
+            })
+
+        }
+    )
+
 
 
 export const updateTask =
     atom((get) => get(tasks),
         async (_get, set, {data, id}) => {
-            (await AxiosClient(true)).patch(`${TASKS_URL}${id}`, data).then((response) => {
+            const response = await (await AxiosClient(true))
+                .patch(`${TASKS_URL}${id}`, data).then((response) => {
                 if (response.status === HttpStatusCode.Ok) {
                     _get(getAllTasks)
                 }
@@ -177,6 +208,8 @@ export const updateTask =
 
                 return error
             })
+
+            return response
 
         }
     )
@@ -209,6 +242,33 @@ export const addTask =
                 console.log(error)
                 return error
             })
+
+            return response
+
+        }
+    )
+
+export const deleteTask =
+    atom((get) => get(subTasks),
+        async (_get, set, {id}) => {
+            const response = await (await AxiosClient(true))
+                .delete(`${TASKS_URL}${id}`).then((response) => {
+                    if (response.status === HttpStatusCode.Ok) {
+                        _get(getSubTasks, {parentId: id})
+                    }
+
+                    if (response.status === HttpStatusCode.Unauthorized) {
+                        AuthAtoms.clearData(set)
+                    }
+
+                    return response
+                }).catch(error => {
+                    if (error.response && error.response.status === HttpStatusCode.Unauthorized) {
+                        AuthAtoms.clearData(set)
+                    }
+
+                    return error
+                })
 
             return response
 

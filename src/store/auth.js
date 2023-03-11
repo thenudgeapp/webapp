@@ -4,7 +4,7 @@ import {atomWithStorage} from "jotai/utils"
 import {TOKEN_DATA, USER_DATA} from "../config/constants";
 import AxiosClient from "./axios";
 import AxiosClientNoAuth from "./axios-no-auth";
-import {tasks} from "./task";
+import {backlogTasks, doneTasks, subTasks, tasks, todoTasks} from "./task";
 
 const LOGIN_URL = `/v1/auth/login`
 const REGISTER_URL = `/v1/auth/register`
@@ -142,4 +142,8 @@ export const clearData = (set) => {
     set(tokens, null)
     set(user, null)
     set(tasks, {results: [] })
+    set(backlogTasks, {results: [] })
+    set(todoTasks, {results: [] })
+    set(doneTasks, {results: [] })
+    set(subTasks, {results: [] })
 }

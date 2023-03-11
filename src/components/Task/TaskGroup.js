@@ -6,6 +6,7 @@ import { MoreVert, Add} from "@mui/icons-material";
 import AddTask from "./AddTask";
 import {useState} from "react";
 import DoublyLinkedList from "../../types/DoublyLinkedList";
+import TaskDetail from "./TaskDetail";
 
 const convertToLinkedList = (tasks) => {
     let results = null
@@ -23,14 +24,15 @@ const convertToLinkedList = (tasks) => {
     return results || {}
 }
 
-const renderTasks = (tasks, status) => {
+const renderTasks = (tasks, status, setOpenTaskDetail, setSelectedTask) => {
     const tLL = convertToLinkedList(tasks)
     let task = tLL.head
     const result = []
     let index = 0
     while (task) {
         if (task.value) {
-            result.push(task && <TaskItem task={task.value} key={task.value.id} index={index++}/>)
+            result.push(task && <TaskItem task={task.value} key={task.value.id} index={index++}
+                                          setOpenTaskDetail={setOpenTaskDetail} setSelectedTask={setSelectedTask}/>)
         }
         task = task.next
     }
@@ -42,6 +44,8 @@ const renderTasks = (tasks, status) => {
 const TaskGroup = (props) => {
 
     const [addTask, setAddTask] = useState(false)
+    const [openTaskDetail, setOpenTaskDetail] = useState(false)
+    const [selectedTask, setSelectedTask] = useState()
 
 
     const getStatus = (id) =>
@@ -59,16 +63,21 @@ const TaskGroup = (props) => {
                             <Grid item lg={12} xs={12}>
                                 <Grid container justifyContent={'space-between'} alignItems={'center'}>
                                     <Typography marginBottom={'0'} variant="h6" gutterBottom>{props.title}</Typography>
-                                    <IconButton aria-label="settings">
-                                        <MoreVert />
-                                    </IconButton>
+                                    <Grid justifyContent={'flex-end'} alignItems={'center'}>
+                                        <IconButton style={{padding: '2px'}} onClick={() => setAddTask(true)}>
+                                            <Add />
+                                        </IconButton>
+                                        <IconButton style={{padding: '2px'}} aria-label="settings">
+                                            <MoreVert />
+                                        </IconButton>
+                                    </Grid>
                                 </Grid>
                             </Grid>
                             <Grid item lg={12} xs={12}>
                                 <Droppable droppableId={props.id}>
                                     {(provided, snapshot) => (
                                         <div ref={provided.innerRef}>
-                                            {renderTasks(props.tasks, getStatus(props.id))}
+                                            {renderTasks(props.tasks, getStatus(props.id), setOpenTaskDetail, setSelectedTask)}
                                             {provided.placeholder}
                                         </div>
                                     )}
@@ -84,6 +93,9 @@ const TaskGroup = (props) => {
                                         </Typography>
                                     </IconButton>
                                     <AddTask open={addTask} setOpen={setAddTask} status={getStatus(props.id)} />
+                                    {selectedTask &&
+                                        <TaskDetail open={openTaskDetail} setOpen={setOpenTaskDetail}
+                                                 task={selectedTask}/>}
                                 </Grid>
                             </Grid>
                         </Grid>
