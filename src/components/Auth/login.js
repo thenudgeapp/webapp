@@ -9,7 +9,7 @@ import {
   Label,
   Button,
   Input,
-  FormFeedback, Alert
+  FormFeedback, Alert, CardHeader
 } from "reactstrap";
 import { Link } from "react-router-dom";
 
@@ -21,6 +21,8 @@ import { useFormik } from "formik";
 import {useAtom} from "jotai";
 import {AuthAtoms} from "../../store";
 import { useHistory } from 'react-router-dom'
+import brandWhite from '../../assets/images/logo-white-bg.png'
+import logoDark from "../../assets/images/logo-dark.png";
 
 const Login = () => {
   const history = useHistory()
@@ -75,6 +77,11 @@ const Login = () => {
         <div className="bg-overlay bg-overlay-white"></div>
         <Container>
           <Row className="justify-content-center">
+            <Row className="justify-content-center" >
+              <Col lg={5} md={8} className="justify-content-center d-flex mb-3">
+                <img src={logoDark} height="44" className="l-dark" alt="" />
+              </Col>
+            </Row>
             <Col lg={5} md={8}>
               <Card className="login-page shadow rounded border-0">
                 <CardBody>

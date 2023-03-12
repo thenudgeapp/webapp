@@ -15,6 +15,7 @@ import {useAtom} from "jotai";
 import {AuthAtoms} from "../../store";
 import {HttpStatusCode} from "axios";
 import {verifyEmailRequest} from "../../store/auth";
+import logoDark from "../../assets/images/logo-dark.png";
 
 const VerifyEmail = () => {
 
@@ -62,6 +63,11 @@ const VerifyEmail = () => {
         <div className="bg-overlay bg-overlay-white"></div>
         <Container>
           <Row className="justify-content-center">
+            <Row className="justify-content-center" >
+              <Col lg={5} md={8} className="justify-content-center d-flex mb-3">
+                <img src={logoDark} height="44" className="l-dark" alt="" />
+              </Col>
+            </Row>
             <Col lg={5} md={8}>
               <Card className="shadow rounded border-0">
                 <CardBody>
