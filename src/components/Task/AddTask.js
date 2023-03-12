@@ -31,8 +31,8 @@ const AddTask = ({...props}) => {
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     const [tasks, addTask] = useAtom(TaskAtom.addTask)
-    const [loading, setLoading] = useState(false);
-    const [errorMessage, setErrorMessage] = useState();
+    const [loading, setLoading] = useState(false)
+    const [errorMessage, setErrorMessage] = useState()
     const [bt, getBacklogTasks] = useAtom(TaskAtom.getBacklogTasks)
     const [tt, getTodoTasks] = useAtom(TaskAtom.getTodoTasks)
     const [ipt, getInProgressTasks] = useAtom(TaskAtom.getInProgressTasks)
