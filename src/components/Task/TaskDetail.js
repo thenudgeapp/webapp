@@ -14,6 +14,7 @@ import Editor from "../Shared/Editor";
 import {$getRoot, createEditor} from "lexical";
 import {$generateHtmlFromNodes} from "@lexical/html";
 import * as DOMPurify from 'dompurify';
+import {EditorDefaultConfig} from "../../config/constants";
 
 const style = {
     position: 'absolute',
@@ -26,7 +27,7 @@ const style = {
 };
 
 const TaskDetail = ({...props}) => {
-    const editor = createEditor({})
+    const editor = createEditor(EditorDefaultConfig)
     const editorStateRef = useRef();
     const [displayEditor, setDisplayEditor] = useState(false)
     const [val, setVal] = useState(props.task.description)
@@ -345,7 +346,8 @@ const TaskDetail = ({...props}) => {
                                             </MDBox> :
                                             <MDBox marginLeft={'1.7em'}
                                                         onClick={() => setDisplayEditor(true)}>
-                                                <div color="text.secondary"  dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(toHtml(val))}}/>
+                                                <div color="text.secondary"
+                                                     dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(toHtml(val))}}/>
                                             </MDBox>}
                                     </MDBox>
                                     {displayEditor &&
