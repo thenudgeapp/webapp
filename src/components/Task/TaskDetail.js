@@ -12,6 +12,8 @@ import AddSubTask from "./AddSubTask";
 import {DateRangePicker} from "mui-daterange-picker";
 import Editor from "../Shared/Editor";
 import {$getRoot, createEditor} from "lexical";
+import {$generateHtmlFromNodes} from "@lexical/html";
+import * as DOMPurify from 'dompurify';
 
 const style = {
     position: 'absolute',
@@ -48,6 +50,7 @@ const TaskDetail = ({...props}) => {
     const [showToolbar, setShowToolbar] = useState(false)
     const [deletingStates, setDeletingStates] = useState({})
     const [taskToDelete, setTaskToDelete] = useState()
+    const [confirmDelete, setConfirmDelete] = useState(null)
 
     const toggle = () => setOpen((prevState => !prevState))
 
@@ -72,11 +75,11 @@ const TaskDetail = ({...props}) => {
         }
     }, [dateRange])
 
-    const toPlainText = (raw) => {
+    const toHtml = (raw) => {
         try {
             const descriptionState = editor.parseEditorState(raw)
             return descriptionState.read((data, me) => {
-                return $getRoot().getTextContent()
+                return $generateHtmlFromNodes(editor, null)
             })
         } catch (e) {
             return raw
@@ -120,14 +123,14 @@ const TaskDetail = ({...props}) => {
                         }} variant={'body2'} color="text.secondary" marginLeft={'.4em'}>
                             {`${dayjs.unix(task.endDate).format('DD/MM/YYYY')}`}
                         </Typography>
-                        <Button onClick={() => {
+                        <IconButton onClick={() => {
                             setTaskToDelete(task)
                         }}>
                             {deletingStates[task.id] ?
                                 <CircularProgress size={20} /> :
-                                !taskToDelete && <DeleteOutline/>
+                                !taskToDelete && <DeleteOutline fontSize={'small'}/>
                             }
-                        </Button>
+                        </IconButton>
                     </MDBox>
                 </MDBox>
             </MDBox>
@@ -136,20 +139,58 @@ const TaskDetail = ({...props}) => {
         )
     )
 
-    const deleteTaskHandler = (id) => {
-        setTaskToDelete(null)
-        setDeletingStates((prevState => {
-            return {...prevState, [id]: true}
-        }))
-      deleteTask({id}).then(async (res) => {
-          await getSubTasks({parentId: props.task.id})
-          setDeletingStates(prevState => {
-              const newState = {...prevState}
-              delete newState[id]
-              return newState
-          })
+    const confirmDeleteDialog = () => (
+        <Modal
+            open={confirmDelete}
+            onClose={() => setConfirmDelete(false)}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description">
+            <Box sx={style}>
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                    Delete the task "{props.task.title}" ?
+                </Typography>
+                <MDBox display={'flex'} justifyContent={'flex-end'}>
+                    <MDBox mt={6} mb={1} display={{xs: 'flex'}} justifyContent={'space-between'} md={12}>
+                        <Button variant={'contained'} color={'secondary'} onClick={() => setConfirmDelete(false)}>
+                            No
+                        </Button>
+                        <Button variant="contained" style={{marginLeft: '0.4em'}} md={12} onClick={() => deleteTaskHandler(props.task.id, true)}>
+                            {loading &&
+                                <i className="mdi mdi-loading icon-spinner mdi-24px me-2"></i>
+                            }
+                            Yes
+                        </Button>
+                    </MDBox>
+                </MDBox>
+            </Box>
+        </Modal>
+    )
 
-      })
+    const deleteTaskHandler = (id, isMain = false) => {
+        if (!isMain) {
+            setTaskToDelete(null)
+            setDeletingStates((prevState => {
+                return {...prevState, [id]: true}
+            }))
+            deleteTask({id}).then(async (res) => {
+                await getSubTasks({parentId: props.task.id})
+                setDeletingStates(prevState => {
+                    const newState = {...prevState}
+                    delete newState[id]
+                    return newState
+                })
+
+            })
+
+            return
+        }
+
+        deleteTask({id}).then(async (res) => {
+            await reloadTasks(props.task.status)
+            setLoading(false)
+            props.setOpen(false)
+
+        })
     }
 
     const showDeleteConfirm = () =>
@@ -270,10 +311,16 @@ const TaskDetail = ({...props}) => {
                                     }
                                 }}>
                                     <MDBox display={'flex'} alignItems={'center'}>
+                                        {confirmDelete && confirmDeleteDialog()}
                                         <Notes spacing={10}/>
                                         <Typography variant={'h6'} color="text.secondary" marginLeft={'8px'}>
                                             Description
                                         </Typography>
+                                        <MDBox display={'flex'} justifyContent={'flex-end'} alignItems={'center'} width={'100%'}>
+                                            <IconButton onClick={() => setConfirmDelete(true)}>
+                                                <DeleteOutline />
+                                            </IconButton>
+                                        </MDBox>
                                     </MDBox>
                                     <MDBox>
                                         {displayEditor ?
@@ -296,10 +343,10 @@ const TaskDetail = ({...props}) => {
 
 
                                             </MDBox> :
-                                            <Typography variant={'body2'} color="text.secondary" marginLeft={'1.7em'}
+                                            <MDBox marginLeft={'1.7em'}
                                                         onClick={() => setDisplayEditor(true)}>
-                                                {toPlainText(val)}
-                                            </Typography>}
+                                                <div color="text.secondary"  dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(toHtml(val))}}/>
+                                            </MDBox>}
                                     </MDBox>
                                     {displayEditor &&
                                         <MDBox display={'flex'} justifyContent={'flex-end'} alignItems={'space-between'}>
