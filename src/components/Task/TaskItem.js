@@ -20,6 +20,12 @@ import {Delete, Edit} from "@mui/icons-material";
 import MenuItem from "@mui/material/MenuItem";
 import {useAtom} from "jotai";
 import {TaskAtom} from "../../store";
+import {HeadingNode, QuoteNode} from "@lexical/rich-text";
+import {ListItemNode, ListNode} from "@lexical/list";
+import {CodeHighlightNode, CodeNode} from "@lexical/code";
+import {TableCellNode, TableNode, TableRowNode} from "@lexical/table";
+import {AutoLinkNode, LinkNode} from "@lexical/link";
+import {EditorDefaultConfig} from "../../config/constants";
 
 const style = {
     position: 'absolute',
@@ -44,7 +50,7 @@ const TaskItem = (props) => {
     const [dt, getDoneTasks] = useAtom(TaskAtom.getDoneTasks)
     const open = Boolean(anchorEl)
 
-    const editor = createEditor({})
+    const editor = createEditor(EditorDefaultConfig)
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
