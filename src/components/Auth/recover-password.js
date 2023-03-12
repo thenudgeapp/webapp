@@ -30,6 +30,7 @@ const RecoverPassword = () => {
   const [loading, setLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState()
   const [successMessage, setSuccessMessage] = useState()
+  const [showPassword, setShowPassword] = useState(false)
   const {verificationToken} = useParams()
 
   const validation = useFormik(
@@ -146,7 +147,7 @@ const RecoverPassword = () => {
                                   </i>
                                 </div>
                                 <Input
-                                    type="password"
+                                    type={showPassword ? "text" : "password"}
                                     className="form-control ps-5"
                                     name="password"
                                     autoComplete="new-password"
@@ -158,6 +159,12 @@ const RecoverPassword = () => {
                                       validationVerify.touched.password && validationVerify.errors.password ? true : false
                                     }
                                 />
+                                <div className="form-icon position-relative">
+                                  <FeatherIcon icon={showPassword ? "eye-off" : "eye"} className="fea icon-sm icons icon" style={{
+                                    left: '89%',
+                                    top: '-27px',
+                                  }} onClick={() => setShowPassword((prevState => !prevState))}/>
+                                </div>
                                 {validationVerify.touched.password && validationVerify.errors.password ? (
                                     <FormFeedback type="invalid">{validationVerify.errors.password}</FormFeedback>
                                 ) : null}
@@ -177,7 +184,7 @@ const RecoverPassword = () => {
                                   </i>
                                 </div>
                                 <Input
-                                    type="password"
+                                    type={showPassword ? "text" : "password"}
                                     autoComplete="new-password"
                                     className="form-control ps-5"
                                     name="reTypePassword"
@@ -189,6 +196,12 @@ const RecoverPassword = () => {
                                       validationVerify.touched.reTypePassword && validationVerify.errors.reTypePassword ? true : false
                                     }
                                 />
+                                <div className="form-icon position-relative">
+                                  <FeatherIcon icon={showPassword ? "eye-off" : "eye"} className="fea icon-sm icons icon" style={{
+                                    left: '89%',
+                                    top: '-27px',
+                                  }} onClick={() => setShowPassword((prevState => !prevState))}/>
+                                </div>
                                 {validationVerify.touched.reTypePassword && validationVerify.errors.reTypePassword ? (
                                     <FormFeedback type="invalid">{validationVerify.errors.reTypePassword}</FormFeedback>
                                 ) : null}

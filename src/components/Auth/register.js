@@ -9,7 +9,7 @@ import {
   Label,
   Button,
   Input,
-  FormFeedback, Alert
+  FormFeedback, Alert, InputGroup, InputGroupText
 } from "reactstrap";
 import { Link } from "react-router-dom";
 
@@ -23,6 +23,7 @@ import {AuthAtoms} from "../../store";
 import {HttpStatusCode} from "axios";
 import { useHistory } from 'react-router-dom'
 import logoDark from "../../assets/images/logo-dark.png";
+import {UilEye} from "@iconscout/react-unicons";
 
 const Register = () => {
   const history = useHistory()
@@ -30,6 +31,7 @@ const Register = () => {
   const [user, __] = useAtom(AuthAtoms.user)
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
+  const [showPassword, setShowPassword] = useState(false)
 
   useEffect(() => {
     if (user) {
@@ -223,26 +225,32 @@ const Register = () => {
                           <div className="form-icon position-relative">
                             <i>
                               <FeatherIcon
-                                icon="key"
-                                className="fea icon-sm icons"
+                                  icon="key"
+                                  className="fea icon-sm icons"
                               />
                             </i>
                           </div>
                           <Input
-                            type="password"
-                            className="form-control ps-5"
-                            name="password"
-                            placeholder="Password"
-                            autoComplete="current-password"
-                            onChange={validation.handleChange}
-                            onBlur={validation.handleBlur}
-                            value={validation.values.password || ""}
-                            invalid={
-                              validation.touched.password && validation.errors.password ? true : false
-                            }
+                              type={showPassword ? "text" : "password"}
+                              className="form-control ps-5"
+                              name="password"
+                              placeholder="Password"
+                              autoComplete="current-password"
+                              onChange={validation.handleChange}
+                              onBlur={validation.handleBlur}
+                              value={validation.values.password || ""}
+                              invalid={
+                                validation.touched.password && validation.errors.password ? true : false
+                              }
                           />
+                          <div className="form-icon position-relative">
+                            <FeatherIcon icon={showPassword ? "eye-off" : "eye"} className="fea icon-sm icons icon" style={{
+                              left: '89%',
+                              top: '-27px',
+                            }} onClick={() => setShowPassword((prevState => !prevState))}/>
+                          </div>
                           {validation.touched.password && validation.errors.password ? (
-                            <FormFeedback type="invalid">{validation.errors.password}</FormFeedback>
+                              <FormFeedback type="invalid">{validation.errors.password}</FormFeedback>
                           ) : null}
                         </div>
                       </Col>

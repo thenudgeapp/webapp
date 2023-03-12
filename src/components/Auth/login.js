@@ -21,7 +21,6 @@ import { useFormik } from "formik";
 import {useAtom} from "jotai";
 import {AuthAtoms} from "../../store";
 import { useHistory } from 'react-router-dom'
-import brandWhite from '../../assets/images/logo-white-bg.png'
 import logoDark from "../../assets/images/logo-dark.png";
 
 const Login = () => {
@@ -30,6 +29,7 @@ const Login = () => {
   const [__, login] = useAtom(AuthAtoms.login)
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
+  const [showPassword, setShowPassword] = useState(false)
 
 
   useEffect(() => {
@@ -142,7 +142,7 @@ const Login = () => {
                             </i>
                           </div>
                           <Input
-                            type="password"
+                              type={showPassword ? "text" : "password"}
                             className="form-control ps-5"
                             name="password"
                             id="password"
@@ -155,6 +155,12 @@ const Login = () => {
                               validation.touched.password && validation.errors.password ? true : false
                             }
                           />
+                          <div className="form-icon position-relative">
+                            <FeatherIcon icon={showPassword ? "eye-off" : "eye"} className="fea icon-sm icons icon" style={{
+                              left: '89%',
+                              top: '-27px',
+                            }} onClick={() => setShowPassword((prevState => !prevState))}/>
+                          </div>
                           {validation.touched.password && validation.errors.password ? (
                             <FormFeedback type="invalid">{validation.errors.password}</FormFeedback>
                           ) : null}
