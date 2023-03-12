@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from "react";
 import {Box, Button, Checkbox, CircularProgress, Grid, IconButton, ListItem, Modal, Typography} from "@mui/material";
 import MDBox from "../Shared/MDBox";
-import {Close, DeleteOutline, KeyboardArrowDown, Notes, TaskOutlined} from "@mui/icons-material";
+import {Close, DeleteOutline, EditOutlined, KeyboardArrowDown, Notes, TaskOutlined} from "@mui/icons-material";
 import dayjs from "dayjs";
 import {HttpStatusCode} from "axios";
 import {useAtom} from "jotai";
@@ -317,6 +317,9 @@ const TaskDetail = ({...props}) => {
                                         <Typography variant={'h6'} color="text.secondary" marginLeft={'8px'}>
                                             Description
                                         </Typography>
+                                        <IconButton onClick={() => setDisplayEditor(true) }>
+                                            <EditOutlined fontSize={'small'}/>
+                                        </IconButton>
                                         <MDBox display={'flex'} justifyContent={'flex-end'} alignItems={'center'} width={'100%'}>
                                             <IconButton onClick={() => setConfirmDelete(true)}>
                                                 <DeleteOutline />
