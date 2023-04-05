@@ -28,7 +28,7 @@ const style = {
 const Onboarding = ({...props}) => {
     const [user, updateUser] = useAtom(AuthAtoms.updateUser)
     const editorStateRef = useRef();
-    const [val, setVal] = useState(user.bio || '')
+    const [val, setVal] = useState(user.bio || undefined)
     const [open, setOpen] = useState(false)
     const [valIntermediate, setValIntermediate] = useState()
     const [loading, setLoading] = useState(false);

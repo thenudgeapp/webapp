@@ -19,7 +19,7 @@ const Home = () => {
     const [tt, getTodoTasks] = useAtom(TaskAtom.getTodoTasks)
     const [ipt, getInProgressTasks] = useAtom(TaskAtom.getInProgressTasks)
     const [dt, getDoneTasks] = useAtom(TaskAtom.getDoneTasks)
-    const [open, setOpen] = useState(localStorage.getItem(ONBOARD_DISPLAY))
+    const [open, setOpen] = useState(!!localStorage.getItem(ONBOARD_DISPLAY))
 
     useEffect(() => {
         if (!user) {
