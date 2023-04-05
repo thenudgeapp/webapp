@@ -119,9 +119,9 @@ class Layout extends Component {
   componentDidMount() {
     document.body.classList = "";
     document.querySelectorAll("#buyButton").forEach((navLink) => {
-      navLink.classList.add("btn-light")
-      navLink.classList.remove("btn-soft-primary");
-      document.getElementById("top-menu").classList.add("nav-light");
+      navLink.classList?.add("btn-light")
+      navLink?.classList?.remove("btn-soft-primary");
+      document.getElementById("top-menu")?.classList?.add("nav-light");
     })
     window.addEventListener("scroll", this.scrollNavigation, true);
   }

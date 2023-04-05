@@ -26,6 +26,7 @@ import {CodeHighlightNode, CodeNode} from "@lexical/code";
 import {TableCellNode, TableNode, TableRowNode} from "@lexical/table";
 import {AutoLinkNode, LinkNode} from "@lexical/link";
 import {EditorDefaultConfig} from "../../config/constants";
+import TaskDetail from "./TaskDetail";
 
 const style = {
     position: 'absolute',
@@ -43,6 +44,7 @@ const TaskItem = (props) => {
     const [confirmDelete, setConfirmDelete] = useState(null)
     const [loading, setLoading] = useState(false)
     const [errorMessage, setErrorMessage] = useState()
+    const [openTaskDetail, setOpenTaskDetail] = useState(false)
     const [, deleteTask] = useAtom(TaskAtom.deleteTask)
     const [bt, getBacklogTasks] = useAtom(TaskAtom.getBacklogTasks)
     const [tt, getTodoTasks] = useAtom(TaskAtom.getTodoTasks)
@@ -87,8 +89,7 @@ const TaskItem = (props) => {
     }
 
     const edit = () => {
-        props.setSelectedTask(props.task)
-        props.setOpenTaskDetail(true)
+        setOpenTaskDetail(true)
         handleClose()
     }
 
@@ -186,7 +187,7 @@ const TaskItem = (props) => {
                             overflow: 'hidden',
                             textOverflow: 'ellipsis',
                             display: '-webkit-box',
-                            'WebkitLineClamp': '1',
+                            'WebkitLineClamp': '2',
                             'WebkitBoxOrient': 'vertical'
                         }} onClick={edit} gutterBottom>{props.task.title}</Typography>}
                     />
@@ -206,6 +207,8 @@ const TaskItem = (props) => {
                             <Typography variant={'caption'}>{days(props.task.endDate)}</Typography>
                         </MDBox>
                     </CardActions>
+                    <TaskDetail open={openTaskDetail} setOpen={setOpenTaskDetail}
+                                task={props.task}/>
                     {provided.placeholder}
                 </Card>
             )}

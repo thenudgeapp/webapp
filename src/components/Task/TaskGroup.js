@@ -6,7 +6,7 @@ import { MoreVert, Add} from "@mui/icons-material";
 import AddTask from "./AddTask";
 import {useState} from "react";
 import DoublyLinkedList from "../../types/DoublyLinkedList";
-import TaskDetail from "./TaskDetail";
+import Onboarding from "../Profile/Onboarding";
 
 const convertToLinkedList = (tasks) => {
     let results = null
@@ -24,15 +24,14 @@ const convertToLinkedList = (tasks) => {
     return results || {}
 }
 
-const renderTasks = (tasks, status, setOpenTaskDetail, setSelectedTask) => {
+const renderTasks = (tasks, status) => {
     const tLL = convertToLinkedList(tasks)
     let task = tLL.head
     const result = []
     let index = 0
     while (task) {
         if (task.value) {
-            result.push(task && <TaskItem task={task.value} key={task.value.id} index={index++}
-                                          setOpenTaskDetail={setOpenTaskDetail} setSelectedTask={setSelectedTask}/>)
+            result.push(task && <TaskItem task={task.value} key={task.value.id} index={index++}/>)
         }
         task = task.next
     }
@@ -42,10 +41,9 @@ const renderTasks = (tasks, status, setOpenTaskDetail, setSelectedTask) => {
 }
 
 const TaskGroup = (props) => {
+    console.log("sssssssssssssssssssss")
 
     const [addTask, setAddTask] = useState(false)
-    const [openTaskDetail, setOpenTaskDetail] = useState(false)
-    const [selectedTask, setSelectedTask] = useState()
 
 
     const getStatus = (id) =>
@@ -55,8 +53,8 @@ const TaskGroup = (props) => {
 
 
     return (
-        <Grid item xs={12} md={6} lg={3}>
-            <MDBox mb={3}>
+        <Grid item xs={12} md={6} lg={4}>
+            <MDBox sx={{width: '96%'}} mb={3}>
                 <Paper elevation={0} sx={{ height: "100%", background: "#dee2e6" }}>
                     <MDBox shadow={'none'} display={'flex'} padding="1rem">
                         <Grid spacing={1} container>
@@ -77,7 +75,7 @@ const TaskGroup = (props) => {
                                 <Droppable droppableId={props.id}>
                                     {(provided, snapshot) => (
                                         <div ref={provided.innerRef}>
-                                            {renderTasks(props.tasks, getStatus(props.id), setOpenTaskDetail, setSelectedTask)}
+                                            {renderTasks(props.tasks, getStatus(props.id))}
                                             {provided.placeholder}
                                         </div>
                                     )}
@@ -93,9 +91,6 @@ const TaskGroup = (props) => {
                                         </Typography>
                                     </IconButton>
                                     <AddTask open={addTask} setOpen={setAddTask} status={getStatus(props.id)} />
-                                    {selectedTask &&
-                                        <TaskDetail open={openTaskDetail} setOpen={setOpenTaskDetail}
-                                                 task={selectedTask}/>}
                                 </Grid>
                             </Grid>
                         </Grid>

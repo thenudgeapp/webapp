@@ -92,7 +92,7 @@ a {
   align-items: center;
   border-radius: 5px !important;
   outline: none;
-  
+
   &:hover {
     background-color: $primary !important;
     transform: rotate(45deg);
@@ -208,4 +208,15 @@ a {
   @media (min-width: 1200px){
       max-width: 1140px;
   }
+}
+
+.one-line {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical
+}
+.bg-light-gray{
+  background-color: #F4F5F7!important;
 }

@@ -12,6 +12,7 @@ export const TASKS_DATA_BACKLOG = 'TASKS_DATA_BACKLOG'
 export const TASKS_DATA_TODO = 'TASKS_DATA_TODO'
 export const TASKS_DATA_IN_PROGRESS = 'TASKS_DATA_IN_PROGRESS'
 export const TASKS_DATA_DONE = 'TASKS_DATA_DONE'
+export const ONBOARD_DISPLAY="ONBOARD_DISPLAY"
 export const EditorDefaultConfig = {
     nodes: [
         HeadingNode,

@@ -24,6 +24,7 @@ import {HttpStatusCode} from "axios";
 import { useHistory } from 'react-router-dom'
 import logoDark from "../../assets/images/logo-dark.png";
 import {UilEye} from "@iconscout/react-unicons";
+import {ONBOARD_DISPLAY} from "../../config/constants";
 
 const Register = () => {
   const history = useHistory()
@@ -35,6 +36,7 @@ const Register = () => {
 
   useEffect(() => {
     if (user) {
+      localStorage.setItem(ONBOARD_DISPLAY, true)
       history.push('/home')
     }
   }, [user])
@@ -254,7 +256,7 @@ const Register = () => {
                           ) : null}
                         </div>
                       </Col>
-                      <Col md={12}>
+                      {/*<Col md={12}>
                         <div className="mb-3">
                           <Label className="form-label">
                             Job Role
@@ -359,7 +361,7 @@ const Register = () => {
                             <option value="large">Large corporation (> 200 employees)</option>
                           </Input>
                         </div>
-                      </Col>
+                      </Col>*/}
                       <Col md={12}>
                         <div className="mb-3">
                           <div className="form-check">
