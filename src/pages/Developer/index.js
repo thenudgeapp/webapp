@@ -11,7 +11,7 @@ const Index = () => {
 
   useEffect(() => {
     document.body.classList = "";
-    document.querySelector(".shoppingbtn").classList.add("btn-primary");
+    document.querySelector(".shoppingbtn")?.classList?.add("btn-primary");
     window.addEventListener("scroll", scrollNavigation, true);
   });
 
@@ -26,9 +26,9 @@ const Index = () => {
         navBar.classList.add("nav-sticky");
       } else {
         navBar.classList.remove("nav-sticky");
-        document.querySelector(".shoppingbtn").classList.add("btn-primary");
-        document.querySelector(".shoppingbtn").classList.remove("btn-light");
-        document.querySelector(".settingbtn").classList.add("btn-soft-primary");
+        document.querySelector(".shoppingbtn")?.classList?.add("btn-primary");
+        document.querySelector(".shoppingbtn")?.classList?.remove("btn-light");
+        document.querySelector(".settingbtn")?.classList?.add("btn-soft-primary");
       }
     }
   };

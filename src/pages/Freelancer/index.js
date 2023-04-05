@@ -31,7 +31,7 @@ const Freelancer = () => {
 
     useEffect(() => {
         document.body.classList = "";
-        document.querySelector(".shoppingbtn").classList.add("btn-primary");
+        document.querySelector(".shoppingbtn")?.classList?.add("btn-primary");
         window.addEventListener("scroll", scrollNavigation, true);
     });
 

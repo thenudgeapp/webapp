@@ -31,7 +31,7 @@ const Loader = () => {
 class PageFooterLayouts extends Component {
   componentDidMount() {
     document.body.classList = "";
-    document.querySelector(".shoppingbtn").classList.add("btn-primary");
+    document.querySelector(".shoppingbtn")?.classList?.add("btn-primary");
     window.addEventListener("scroll", this.scrollNavigation, true);
   }
 

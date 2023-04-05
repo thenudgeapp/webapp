@@ -89,7 +89,7 @@ const CryptoToken = () => {
   const [isOpen, setOpen] = useState(false);
 
   useEffect(() => {
-    document.getElementById("buyButton").classList.add("nav-light");
+    document.getElementById("buyButton")?.classList?.add("nav-light");
     window.addEventListener("scroll", scrollNavigation, true);
   });
 
@@ -102,8 +102,8 @@ const CryptoToken = () => {
         navBar.classList.add("nav-sticky");
       } else {
         navBar.classList.remove("nav-sticky");
-        document.querySelector(".settingbtn").classList.remove("btn-soft-primary");
-        document.querySelector(".settingbtn").classList.add("btn-light");
+        document.querySelector(".settingbtn")?.classList?.remove("btn-soft-primary");
+        document.querySelector(".settingbtn")?.classList?.add("btn-light");
 
       }
     }

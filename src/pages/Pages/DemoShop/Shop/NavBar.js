@@ -124,8 +124,8 @@ class NavBar extends Component {
     var doc = document.documentElement;
     var top = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0);
     if (top > 80) {
-      document.getElementById('topnav').classList.add('nav-sticky');
-      document.querySelector(".settingbtn").classList.add("btn-primary");
+      document.getElementById('topnav')?.classList?.add('nav-sticky');
+      document.querySelector(".settingbtn")?.classList?.add("btn-primary");
     } else {
       document.getElementById('topnav')?.classList.remove('nav-sticky');
       document.querySelector(".settingbtn")?.classList.add("btn-primary");
@@ -311,7 +311,7 @@ class NavBar extends Component {
                 <Dropdown
                   color="primary"
                   isOpen={this.state.dropdownIsOpen}
-                  toggle={this.toggleDropdownIsOpen}                  
+                  toggle={this.toggleDropdownIsOpen}
                 >
                   <DropdownToggle
                     type="button"

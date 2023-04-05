@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Dropdown, DropdownToggle, DropdownMenu, Form } from 'reactstrap';
 
-//import images 
+//import images
 import logoDark from "../../../assets/images/logo-dark.png";
 import logoLight from "../../../assets/images/logo-light.png";
 import FeatherIcon from "feather-icons-react";
@@ -97,9 +97,9 @@ class NavBar extends Component {
                 navBar.classList.add("nav-sticky");
             } else {
                 navBar.classList.remove("nav-sticky");
-                document.querySelector(".shoppingbtn").classList.add("btn-primary");
-                document.querySelector(".shoppingbtn").classList.remove("btn-light");
-                document.querySelector(".settingbtn").classList.add("btn-soft-primary");
+                document.querySelector(".shoppingbtn")?.classList?.add("btn-primary");
+                document.querySelector(".shoppingbtn")?.classList?.remove("btn-light");
+                document.querySelector(".settingbtn")?.classList?.add("btn-soft-primary");
             }
         }
     };

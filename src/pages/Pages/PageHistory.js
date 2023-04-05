@@ -16,7 +16,7 @@ import blog6 from "../../assets/images/blog/06.jpg";
 export default class PageHistory extends Component {
   componentDidMount() {
     document.body.classList = "";
-    document.querySelector(".shoppingbtn").classList.add("btn-primary");
+    document.querySelector(".shoppingbtn")?.classList?.add("btn-primary");
     window.addEventListener("scroll", this.scrollNavigation, true);
   }
 
@@ -34,9 +34,9 @@ export default class PageHistory extends Component {
         navBar.classList.add("nav-sticky");
       } else {
         navBar.classList.remove("nav-sticky");
-        document.querySelector(".shoppingbtn").classList.add("btn-primary");
-        document.querySelector(".shoppingbtn").classList.remove("btn-light");
-        document.querySelector(".settingbtn").classList.add("btn-soft-primary");
+        document.querySelector(".shoppingbtn")?.classList?.add("btn-primary");
+        document.querySelector(".shoppingbtn")?.classList?.remove("btn-light");
+        document.querySelector(".settingbtn")?.classList?.add("btn-soft-primary");
       }
     }
   };
