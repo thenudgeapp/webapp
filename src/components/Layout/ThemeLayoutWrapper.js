@@ -103,8 +103,12 @@ function ThemeLayoutWrapper(props) {
 
             let newPosition = (first + second) / 2
 
-            if (to === prev.results.length - 1) {
+            if (to === 0) {
                 newPosition = -65536
+            }
+
+            if (to === prev.results.length - 1) {
+                newPosition = prev.results[to].position / 2
             }
 
             task.position = newPosition
