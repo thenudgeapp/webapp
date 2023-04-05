@@ -52,13 +52,12 @@ const ProfileInfoCard = ({title, social, action, shadow}) => {
     const [user, updateUser] = useAtom(AuthAtoms.updateUser)
     const [displayEditor, setDisplayEditor] = useState(false)
     const [showToolbar, setShowToolbar] = useState(false)
-    const [val, setVal] = useState(user.bio || 'Tell about yourself...')
-    const [valIntermediate, setValIntermediate] = useState(user.bio || 'Tell about yourself...')
+    const [val, setVal] = useState(user.bio || undefined)
+    const [valIntermediate, setValIntermediate] = useState(user.bio || undefined)
     const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState();
     const {socialMediaColors} = colors;
     const {size} = typography;
-    const [description, setDescription] = useState(user.bio || 'Tell about yourself...')
     const notEditable = {email: true}
 
     const [info, setInfo] = useState({
@@ -343,7 +342,7 @@ const ProfileInfoCard = ({title, social, action, shadow}) => {
                                                                        onChange={(st) => {
                                                                            setValIntermediate(JSON.stringify(convertToRaw(st.getCurrentContent())))
                                                                        }} toolbar={showToolbar}/>*/}
-                                <Editor placeholderText={'Details about this task'}
+                                <Editor placeholderText={'Tell us a bit about your career profile and experience...'}
                                         enable={showToolbar} editorState={val}
                                         onChange={setValIntermediate}/>
                             </MDBox>
