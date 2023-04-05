@@ -11,7 +11,7 @@ import Popup from "../../components/Layout/popup";
 
 class Index extends Component {
   componentDidMount() {
-    document.querySelector(".shoppingbtn").classList.add("btn-primary");
+    document.querySelector(".shoppingbtn")?.classList?.add("btn-primary");
     window.addEventListener("scroll", this.scrollNavigation, true);
   }
 

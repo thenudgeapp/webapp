@@ -18,8 +18,8 @@ import location from "../../assets/images/icon/location.svg";
 
 const Icons = () => {
     useEffect(() => {
-        document.getElementById("buyButton").classList.add("nav-light");
-        document.querySelector(".shoppingbtn").classList.add("btn-primary");
+        document.getElementById("buyButton")?.classList?.add("nav-light");
+        document.querySelector(".shoppingbtn")?.classList?.add("btn-primary");
         window.addEventListener("scroll", scrollNavigation, true);
     });
 
@@ -32,9 +32,9 @@ const Icons = () => {
                 navBar.classList.add("nav-sticky");
             } else {
                 navBar.classList.remove("nav-sticky");
-                document.querySelector(".shoppingbtn").classList.add("btn-primary");
-                document.querySelector(".shoppingbtn").classList.remove("btn-light");
-                document.querySelector(".settingbtn").classList.add("btn-soft-primary");
+                document.querySelector(".shoppingbtn")?.classList?.add("btn-primary");
+                document.querySelector(".shoppingbtn")?.classList?.remove("btn-light");
+                document.querySelector(".settingbtn")?.classList?.add("btn-soft-primary");
             }
         }
     };

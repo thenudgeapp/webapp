@@ -17,8 +17,8 @@ import NavBar from './NavBar';
 class PageJobDetailThree extends Component {
   componentDidMount() {
     document.body.classList = "";
-    document.querySelector(".settingbtn").classList.add("btn-light");
-    document.querySelector(".shoppingbtn").classList.add("btn-primary");
+    document.querySelector(".settingbtn")?.classList?.add("btn-light");
+    document.querySelector(".shoppingbtn")?.classList?.add("btn-primary");
     window.addEventListener("scroll", this.scrollNavigation, true);
   }
 

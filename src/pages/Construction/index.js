@@ -14,7 +14,7 @@ export default class index extends Component {
     document.querySelectorAll("#buyButton").forEach((navLink) => {
       navLink.classList.add("btn-light")
       navLink.classList.remove("btn-soft-primary");
-      document.getElementById("top-menu").classList.add("nav-light");
+      document.getElementById("top-menu")?.classList?.add("nav-light");
     });
     window.addEventListener("scroll", this.scrollNavigation, true);
   }
@@ -33,7 +33,7 @@ export default class index extends Component {
       document.querySelector(".shoppingbtn")?.classList.add("btn-primary");
       document.querySelector(".settingbtn")?.classList.add("btn-soft-primary");
 
-      document.getElementById("topnav").classList.add("nav-sticky");
+      document.getElementById("topnav")?.classList?.add("nav-sticky");
     } else {
       document.querySelector(".shoppingbtn")?.classList.remove("btn-primary");
       document.querySelector(".settingbtn")?.classList.remove("btn-soft-primary");

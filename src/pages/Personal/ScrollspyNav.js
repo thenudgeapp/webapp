@@ -108,7 +108,7 @@ class ScrollspyNav extends Component {
               scrollSectionOffsetTop +
                 document.getElementById(sectionID).scrollHeight
           ) {
-            this.getNavLinkElement(sectionID).classList.add(
+            this.getNavLinkElement(sectionID)?.classList?.add(
               this.activeNavClass
             );
             this.getNavLinkElement(sectionID).parentNode.classList.add(
@@ -116,7 +116,7 @@ class ScrollspyNav extends Component {
             );
             this.clearOtherNavLinkActiveStyle(sectionID);
           } else {
-            this.getNavLinkElement(sectionID).classList.remove(
+            this.getNavLinkElement(sectionID)?.classList?.remove(
               this.activeNavClass
             );
             this.getNavLinkElement(sectionID).parentNode.classList.remove(
@@ -129,7 +129,7 @@ class ScrollspyNav extends Component {
               document.body.scrollHeight &&
             index === this.scrollTargetIds.length - 1
           ) {
-            this.getNavLinkElement(sectionID).classList.add(
+            this.getNavLinkElement(sectionID)?.classList?.add(
               this.activeNavClass
             );
             this.getNavLinkElement(sectionID).parentNode.classList.add(
@@ -145,7 +145,7 @@ class ScrollspyNav extends Component {
   clearOtherNavLinkActiveStyle(excludeSectionID) {
     this.scrollTargetIds.forEach((sectionID, index) => {
       if (sectionID !== excludeSectionID) {
-        this.getNavLinkElement(sectionID).classList.remove(this.activeNavClass);
+        this.getNavLinkElement(sectionID)?.classList?.remove(this.activeNavClass);
         this.getNavLinkElement(sectionID).parentNode.classList.remove(
           this.activeNavClass
         );

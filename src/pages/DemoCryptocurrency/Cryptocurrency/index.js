@@ -22,7 +22,7 @@ class Cryptocurrency extends Component {
   componentDidMount() {
     setTimeout(() => {
       console.log('active')
-      document.querySelector(".shoppingbtn").classList.remove("btn-light");
+      document.querySelector(".shoppingbtn")?.classList?.remove("btn-light");
     }, 200);
     document.body.classList = "";
     document.querySelectorAll("#buyButton").forEach((navLink) => {
@@ -41,18 +41,18 @@ class Cryptocurrency extends Component {
     var doc = document.documentElement;
     var top = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0);
     if (top > 80) {
-      document.querySelector(".shoppingbtn").classList.remove("btn-light");
-      document.querySelector(".settingbtn").classList.remove("btn-light");
-      document.querySelector(".shoppingbtn").classList.add("btn-primary");
-      document.querySelector(".settingbtn").classList.add("btn-soft-primary");
+      document.querySelector(".shoppingbtn")?.classList?.remove("btn-light");
+      document.querySelector(".settingbtn")?.classList?.remove("btn-light");
+      document.querySelector(".shoppingbtn")?.classList?.add("btn-primary");
+      document.querySelector(".settingbtn")?.classList?.add("btn-soft-primary");
 
-      // document.getElementById("topnav").classList.add("nav-sticky");
+      // document.getElementById("topnav")?.classList?.add("nav-sticky");
     } else {
-      document.querySelector(".shoppingbtn").classList.add("btn-primary");
-      document.querySelector(".settingbtn").classList.remove("btn-soft-primary");
-      // document.querySelector(".shoppingbtn").classList.add("btn-light");
-      document.querySelector(".settingbtn").classList.add("btn-light");
-      document.getElementById("topnav").classList.remove("nav-sticky");
+      document.querySelector(".shoppingbtn")?.classList?.add("btn-primary");
+      document.querySelector(".settingbtn")?.classList?.remove("btn-soft-primary");
+      // document.querySelector(".shoppingbtn")?.classList?.add("btn-light");
+      document.querySelector(".settingbtn")?.classList?.add("btn-light");
+      document.getElementById("topnav")?.classList?.remove("nav-sticky");
     }
   };
 

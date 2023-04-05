@@ -35,7 +35,7 @@ const Index = () => {
     document.querySelectorAll("#buyButton").forEach((navLink) => {
       navLink.classList.add("btn-light")
       navLink.classList.remove("btn-soft-primary");
-      document.getElementById("top-menu").classList.add("nav-light");
+      document.getElementById("top-menu")?.classList?.add("nav-light");
     });
     window.addEventListener("scroll", scrollNavigation, true);
   });

@@ -17,8 +17,8 @@ import { agencyFeatureArray } from "../../common/data";
 
 const IndexAgency = () => {
   useEffect(() => {
-    document.getElementById("buyButton").classList.add("nav-light");
-    document.querySelector(".shoppingbtn").classList.add("btn-primary");
+    document.getElementById("buyButton")?.classList?.add("nav-light");
+    document.querySelector(".shoppingbtn")?.classList?.add("btn-primary");
     window.addEventListener("scroll", scrollNavigation, true);
   });
 
