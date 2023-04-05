@@ -9,7 +9,7 @@ import {
   Label,
   Button,
   Input,
-  FormFeedback, Alert
+  FormFeedback, Alert, InputGroup, InputGroupText
 } from "reactstrap";
 import { Link } from "react-router-dom";
 
@@ -22,6 +22,9 @@ import {useAtom} from "jotai";
 import {AuthAtoms} from "../../store";
 import {HttpStatusCode} from "axios";
 import { useHistory } from 'react-router-dom'
+import logoDark from "../../assets/images/logo-dark.png";
+import {UilEye} from "@iconscout/react-unicons";
+import {ONBOARD_DISPLAY} from "../../config/constants";
 
 const Register = () => {
   const history = useHistory()
@@ -29,9 +32,11 @@ const Register = () => {
   const [user, __] = useAtom(AuthAtoms.user)
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
+  const [showPassword, setShowPassword] = useState(false)
 
   useEffect(() => {
     if (user) {
+      localStorage.setItem(ONBOARD_DISPLAY, true)
       history.push('/home')
     }
   }, [user])
@@ -102,10 +107,18 @@ const Register = () => {
         <div className="bg-overlay bg-overlay-white"></div>
         <Container>
           <Row className="justify-content-center">
+            <Row className="justify-content-center" >
+              <Col lg={5} md={8} className="justify-content-center d-flex mb-3">
+                <img src={logoDark} height="44" className="l-dark" alt="" />
+              </Col>
+            </Row>
             <Col lg={5} md={8}>
               <Card className="shadow rounded border-0 mt-4">
                 <CardBody>
                   <h4 className="card-title text-center">Signup</h4>
+                  <h6 className='card-text text-center'>
+                    Start your guided journey to success
+                  </h6>
                   <Form
                     onSubmit={(e) => {
                       e.preventDefault();
@@ -214,30 +227,36 @@ const Register = () => {
                           <div className="form-icon position-relative">
                             <i>
                               <FeatherIcon
-                                icon="key"
-                                className="fea icon-sm icons"
+                                  icon="key"
+                                  className="fea icon-sm icons"
                               />
                             </i>
                           </div>
                           <Input
-                            type="password"
-                            className="form-control ps-5"
-                            name="password"
-                            placeholder="Password"
-                            autoComplete="current-password"
-                            onChange={validation.handleChange}
-                            onBlur={validation.handleBlur}
-                            value={validation.values.password || ""}
-                            invalid={
-                              validation.touched.password && validation.errors.password ? true : false
-                            }
+                              type={showPassword ? "text" : "password"}
+                              className="form-control ps-5"
+                              name="password"
+                              placeholder="Password"
+                              autoComplete="current-password"
+                              onChange={validation.handleChange}
+                              onBlur={validation.handleBlur}
+                              value={validation.values.password || ""}
+                              invalid={
+                                validation.touched.password && validation.errors.password ? true : false
+                              }
                           />
+                          <div className="form-icon position-relative">
+                            <FeatherIcon icon={showPassword ? "eye-off" : "eye"} className="fea icon-sm icons icon" style={{
+                              left: '89%',
+                              top: '-27px',
+                            }} onClick={() => setShowPassword((prevState => !prevState))}/>
+                          </div>
                           {validation.touched.password && validation.errors.password ? (
-                            <FormFeedback type="invalid">{validation.errors.password}</FormFeedback>
+                              <FormFeedback type="invalid">{validation.errors.password}</FormFeedback>
                           ) : null}
                         </div>
                       </Col>
-                      <Col md={12}>
+                      {/*<Col md={12}>
                         <div className="mb-3">
                           <Label className="form-label">
                             Job Role
@@ -342,7 +361,7 @@ const Register = () => {
                             <option value="large">Large corporation (> 200 employees)</option>
                           </Input>
                         </div>
-                      </Col>
+                      </Col>*/}
                       <Col md={12}>
                         <div className="mb-3">
                           <div className="form-check">

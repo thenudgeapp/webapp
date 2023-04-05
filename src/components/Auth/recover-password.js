@@ -21,6 +21,7 @@ import FeatherIcon from "feather-icons-react";
 import {useAtom} from "jotai";
 import {AuthAtoms} from "../../store";
 import {HttpStatusCode} from "axios";
+import logoDark from "../../assets/images/logo-dark.png";
 
 const RecoverPassword = () => {
 
@@ -29,6 +30,7 @@ const RecoverPassword = () => {
   const [loading, setLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState()
   const [successMessage, setSuccessMessage] = useState()
+  const [showPassword, setShowPassword] = useState(false)
   const {verificationToken} = useParams()
 
   const validation = useFormik(
@@ -106,6 +108,11 @@ const RecoverPassword = () => {
         <div className="bg-overlay bg-overlay-white"></div>
         <Container>
           <Row className="justify-content-center">
+            <Row className="justify-content-center" >
+              <Col lg={5} md={8} className="justify-content-center d-flex mb-3">
+                <img src={logoDark} height="44" className="l-dark" alt="" />
+              </Col>
+            </Row>
             <Col lg={5} md={8}>
               <Card className="shadow rounded border-0">
                 <CardBody>
@@ -140,7 +147,7 @@ const RecoverPassword = () => {
                                   </i>
                                 </div>
                                 <Input
-                                    type="password"
+                                    type={showPassword ? "text" : "password"}
                                     className="form-control ps-5"
                                     name="password"
                                     autoComplete="new-password"
@@ -152,6 +159,12 @@ const RecoverPassword = () => {
                                       validationVerify.touched.password && validationVerify.errors.password ? true : false
                                     }
                                 />
+                                <div className="form-icon position-relative">
+                                  <FeatherIcon icon={showPassword ? "eye-off" : "eye"} className="fea icon-sm icons icon" style={{
+                                    left: '89%',
+                                    top: '-27px',
+                                  }} onClick={() => setShowPassword((prevState => !prevState))}/>
+                                </div>
                                 {validationVerify.touched.password && validationVerify.errors.password ? (
                                     <FormFeedback type="invalid">{validationVerify.errors.password}</FormFeedback>
                                 ) : null}
@@ -171,7 +184,7 @@ const RecoverPassword = () => {
                                   </i>
                                 </div>
                                 <Input
-                                    type="password"
+                                    type={showPassword ? "text" : "password"}
                                     autoComplete="new-password"
                                     className="form-control ps-5"
                                     name="reTypePassword"
@@ -183,6 +196,12 @@ const RecoverPassword = () => {
                                       validationVerify.touched.reTypePassword && validationVerify.errors.reTypePassword ? true : false
                                     }
                                 />
+                                <div className="form-icon position-relative">
+                                  <FeatherIcon icon={showPassword ? "eye-off" : "eye"} className="fea icon-sm icons icon" style={{
+                                    left: '89%',
+                                    top: '-27px',
+                                  }} onClick={() => setShowPassword((prevState => !prevState))}/>
+                                </div>
                                 {validationVerify.touched.reTypePassword && validationVerify.errors.reTypePassword ? (
                                     <FormFeedback type="invalid">{validationVerify.errors.reTypePassword}</FormFeedback>
                                 ) : null}

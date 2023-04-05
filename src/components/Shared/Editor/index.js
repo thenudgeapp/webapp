@@ -23,8 +23,8 @@ import './styles.css'
 import {OnChangePlugin} from "@lexical/react/LexicalOnChangePlugin";
 
 
-function Placeholder() {
-  return <div className="editor-placeholder">Details about this task</div>;
+function Placeholder(props) {
+  return <div className="editor-placeholder">{props.text}</div>;
 }
 
 const editorConfig = {
@@ -58,7 +58,7 @@ export default function Editor(props) {
         <div className="editor-inner">
           <RichTextPlugin
             contentEditable={<ContentEditable className="editor-input" />}
-            placeholder={<Placeholder />}
+            placeholder={<Placeholder text={props.placeholderText} />}
             ErrorBoundary={LexicalErrorBoundary}
           />
           <HistoryPlugin />
