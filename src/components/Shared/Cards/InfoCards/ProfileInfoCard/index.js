@@ -351,7 +351,7 @@ const ProfileInfoCard = ({title, social, action, shadow}) => {
                         </MDBox> :
                         <MDBox onClick={() => setDisplayEditor(true)}>
                             <div color="text.secondary" className="h6"
-                                 dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(toHtml(val))}}/>
+                                 dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(val ? toHtml(val) : 'Tell us a bit about your career profile and experience...')}}/>
                         </MDBox>}
                     {displayEditor &&
                         <MDBox display={'flex'} justifyContent={'flex-end'} alignItems={'space-between'}>
