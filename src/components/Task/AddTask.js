@@ -236,7 +236,7 @@ const AddTask = ({...props}) => {
                                   </MDBox>
                               </MDBox>
                               <Typography variant={'caption'}>
-                                  * Note: newly added tasks will be displayed last in its status column
+                                  * Note: newly added tasks will be displayed first in its status column
                               </Typography>
                           </MDBox>
                       </Grid>
