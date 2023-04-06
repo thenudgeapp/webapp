@@ -39,6 +39,8 @@ const AddTask = ({...props}) => {
     const [dt, getDoneTasks] = useAtom(TaskAtom.getDoneTasks)
     const [showToolbar, setShowToolbar] = useState(false)
     const [valIntermediate, setValIntermediate] = useState()
+    const [showGoalToolbar, setShowGoalToolbar] = useState(false)
+    const [goalValIntermediate, setGoalValIntermediate] = useState()
 
     const addTaskHandler = () => {
         setDescription(valIntermediate)
@@ -71,6 +73,7 @@ const AddTask = ({...props}) => {
           data: {
               title,
               description: valIntermediate,
+              goal: goalValIntermediate,
               startDate: dayjs(startDate).unix(),
               endDate: dayjs(endDate).unix(),
               status: props.status
@@ -130,7 +133,7 @@ const AddTask = ({...props}) => {
                   <Grid spacing={1} container>
                       <Grid item lg={12} xs={12} className={'bg-primary position-absolute w-100 top-0 left-0 p-3'} sx={{left: 0}}>
                           <MDBox display={'flex'} justifyContent={'space-between'} alignItems={'center'}>
-                              <Typography id="modal-modal-title" className={'text-white'} variant="h6" component="h2">
+                              <Typography id="modal-modal-title" className={'text-white'} variant="h5" component="h2">
                                   Add Task
                               </Typography>
                               <IconButton color={'white'} aria-label="close" onClick={() => props.setOpen(false)}>
@@ -164,13 +167,31 @@ const AddTask = ({...props}) => {
                               <MDBox mb={4}>
                                   <MDBox display={'flex'} alignItems={'center'} justifyContent={'flex-end'}>
                                       <Button size={'small'}
-                                          onClick={() => setShowToolbar((prev) => !prev)}>
+                                              onClick={() => setShowToolbar((prev) => !prev)}>
                                           { showToolbar ?
                                               'Hide Toolbar' : 'Show Toolbar'
                                           }
                                       </Button>
                                   </MDBox>
-                                  <Editor enable={showToolbar} onChange={setValIntermediate}/>
+                                  <Typography variant={'body2'}>
+                                      Description
+                                  </Typography>
+                                  <Editor placeholderText={'Details about this task'} enable={showToolbar} onChange={setValIntermediate}/>
+                              </MDBox>
+                              <MDBox mb={4}>
+                                  <MDBox display={'flex'} alignItems={'center'} justifyContent={'flex-end'}>
+                                      <Button size={'small'}
+                                              onClick={() => setShowGoalToolbar((prev) => !prev)}>
+                                          { showGoalToolbar ?
+                                              'Hide Toolbar' : 'Show Toolbar'
+                                          }
+                                      </Button>
+                                  </MDBox>
+                                  <Typography variant={'body2'}>
+                                      Goal
+                                  </Typography>
+                                  <Editor placeholderText={'Tell us more about the goal you want to achieve'}
+                                          enable={showGoalToolbar} onChange={setGoalValIntermediate}/>
                               </MDBox>
                               <MDBox mb={4} display={{md: 'flex', lg: 'flex', sm: 'block'}} justifyContent={'space-evenly'}>
                                   <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -215,7 +236,7 @@ const AddTask = ({...props}) => {
                                   </MDBox>
                               </MDBox>
                               <Typography variant={'caption'}>
-                                  * Note: newly added tasks will be displayed last in its status column
+                                  * Note: newly added tasks will be displayed first in its status column
                               </Typography>
                           </MDBox>
                       </Grid>

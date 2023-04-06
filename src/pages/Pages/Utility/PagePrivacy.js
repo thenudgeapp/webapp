@@ -6,10 +6,10 @@ import { Row, Col, Container, CardBody, Card } from "reactstrap";
 //Import Icons
 import FeatherIcon from "feather-icons-react";
 
-class PagePrivacy extends Component { 
+class PagePrivacy extends Component {
   componentDidMount() {
     document.body.classList = "";
-    document.querySelector(".shoppingbtn").classList.add("btn-primary");
+    document.querySelector(".shoppingbtn")?.classList?.add("btn-primary");
     window.addEventListener("scroll", this.scrollNavigation, true);
   }
 
@@ -27,9 +27,9 @@ class PagePrivacy extends Component {
         navBar.classList.add("nav-sticky");
       } else {
         navBar.classList.remove("nav-sticky");
-        document.querySelector(".shoppingbtn").classList.add("btn-primary");
-        document.querySelector(".shoppingbtn").classList.remove("btn-light");
-        document.querySelector(".settingbtn").classList.add("btn-soft-primary");
+        document.querySelector(".shoppingbtn")?.classList?.add("btn-primary");
+        document.querySelector(".shoppingbtn")?.classList?.remove("btn-light");
+        document.querySelector(".settingbtn")?.classList?.add("btn-soft-primary");
       }
     }
   };
@@ -49,9 +49,9 @@ class PagePrivacy extends Component {
                                 <li className="list-inline-item h6 date text-muted"> <span className="text-dark">Last Revised :</span> 23th Sep, 2021</li>
                             </ul>
                         </div>
-                    </Col>  
+                    </Col>
                 </Row>
-                
+
                 <div className="position-breadcrumb">
                     <nav aria-label="breadcrumb" className="d-inline-block">
                         <ul className="breadcrumb rounded shadow mb-0 px-4 py-2">
@@ -62,7 +62,7 @@ class PagePrivacy extends Component {
                         </ul>
                     </nav>
                 </div>
-            </Container> 
+            </Container>
         </section>
 
         <div className="position-relative">

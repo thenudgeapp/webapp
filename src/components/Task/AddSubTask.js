@@ -35,15 +35,12 @@ const AddSubTask = ({...props}) => {
     }, [props.open])
 
     const reloadSubTasks = async (newSubTask) => {
-        if (newSubTask) {
-            setSubTasks((prev) => {
-                const subTasksCopy = {...prev}
-                subTasksCopy.results.push(newSubTask)
-                return subTasksCopy
-            })
-        }
-
-        await getSubTasks({parentId: props.parent})
+        if (props.parentStatus === 'TODO')
+            await getTodoTasks({})
+        if (props.parentStatus === 'IN PROGRESS')
+            await getInProgressTasks({})
+        if (props.parentStatus === 'DONE')
+            await getDoneTasks({})
 
     }
 

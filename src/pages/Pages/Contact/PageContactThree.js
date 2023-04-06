@@ -19,7 +19,7 @@ import FeatherIcon from "feather-icons-react";
 // import images
 import contactImg from "../../../assets/images/contact-detail.jpg";
 
-class PageContactThree extends Component {  
+class PageContactThree extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -36,7 +36,7 @@ class PageContactThree extends Component {
 
   componentDidMount() {
     document.body.classList = "";
-    document.querySelector(".shoppingbtn").classList.add("btn-primary");
+    document.querySelector(".shoppingbtn")?.classList?.add("btn-primary");
     window.addEventListener("scroll", this.scrollNavigation, true);
   }
 
@@ -54,9 +54,9 @@ class PageContactThree extends Component {
             navBar.classList.add("nav-sticky");
           } else {
             navBar.classList.remove("nav-sticky");
-            document.querySelector(".shoppingbtn").classList.add("btn-primary");
-            document.querySelector(".shoppingbtn").classList.remove("btn-light");
-            document.querySelector(".settingbtn").classList.add("btn-soft-primary");
+            document.querySelector(".shoppingbtn")?.classList?.add("btn-primary");
+            document.querySelector(".shoppingbtn")?.classList?.remove("btn-light");
+            document.querySelector(".settingbtn")?.classList?.add("btn-soft-primary");
           }
         }
     };
@@ -71,7 +71,7 @@ class PageContactThree extends Component {
 
   render() {
     return (
-      <React.Fragment>        
+      <React.Fragment>
         <section className="bg-half-170 bg-light d-table w-100" style={{background: `url(${contactImg}) center center`}}>
             <div className="bg-overlay bg-overlay-white"></div>
             <Container>
@@ -80,9 +80,9 @@ class PageContactThree extends Component {
                         <div className="pages-heading">
                             <h4 className="title mb-0">Contact Us</h4>
                         </div>
-                    </Col>  
+                    </Col>
                 </Row>
-                
+
                 <div className="position-breadcrumb">
                     <nav aria-label="breadcrumb" className="d-inline-block">
                         <ul className="breadcrumb rounded shadow mb-0 px-4 py-2">
@@ -93,7 +93,7 @@ class PageContactThree extends Component {
                         </ul>
                     </nav>
                 </div>
-            </Container> 
+            </Container>
         </section>
 
         <div className="form-icon position-relative">

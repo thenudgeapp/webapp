@@ -60,6 +60,12 @@ const colors = {
     contrastText: '#666!important',
   },
 
+  fadedButton2: {
+    main: '#D3D3D3!important',
+    focus: '#6c757d',
+    contrastText: '#344767!important',
+  },
+
   secondary: {
     main: "#6c757d",
     focus: "#6c757d",
@@ -88,6 +94,11 @@ const colors = {
   light: {
     main: "#f0f2f5",
     focus: "#f0f2f5",
+  },
+
+  lightGray: {
+    main: "#D3D3D3",
+    focus: "#E1E4E9",
   },
 
   dark: {

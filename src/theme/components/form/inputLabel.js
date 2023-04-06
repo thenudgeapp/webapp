@@ -26,6 +26,7 @@ const inputLabel = {
       fontSize: size.sm,
       color: text.main,
       lineHeight: 0.9,
+      textTransform: 'capitalize',
 
       "&.Mui-focused": {
         color: info.main,

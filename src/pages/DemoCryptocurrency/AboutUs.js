@@ -13,7 +13,7 @@ import Footer from './Footer';
 class AboutUs extends Component {
     componentDidMount() {
         setTimeout(() => {
-            document.querySelector(".shoppingbtn").classList.remove("btn-light");
+            document.querySelector(".shoppingbtn")?.classList?.remove("btn-light");
         }, 200);
         document.body.classList = "";
         window.addEventListener("scroll", this.scrollNavigation, true);
@@ -27,18 +27,18 @@ class AboutUs extends Component {
         var doc = document.documentElement;
         var top = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0);
         if (top > 80) {
-            document.querySelector(".shoppingbtn").classList.remove("btn-light");
-            document.querySelector(".settingbtn").classList.remove("btn-light");
-            document.querySelector(".shoppingbtn").classList.add("btn-primary");
-            document.querySelector(".settingbtn").classList.add("btn-soft-primary");
+            document.querySelector(".shoppingbtn")?.classList?.remove("btn-light");
+            document.querySelector(".settingbtn")?.classList?.remove("btn-light");
+            document.querySelector(".shoppingbtn")?.classList?.add("btn-primary");
+            document.querySelector(".settingbtn")?.classList?.add("btn-soft-primary");
 
-            // document.getElementById("topnav").classList.add("nav-sticky");
+            // document.getElementById("topnav")?.classList?.add("nav-sticky");
         } else {
-            document.querySelector(".shoppingbtn").classList.add("btn-primary");
-            document.querySelector(".settingbtn").classList.remove("btn-soft-primary");
-            // document.querySelector(".shoppingbtn").classList.add("btn-light");
-            document.querySelector(".settingbtn").classList.add("btn-light");
-            document.getElementById("topnav").classList.remove("nav-sticky");
+            document.querySelector(".shoppingbtn")?.classList?.add("btn-primary");
+            document.querySelector(".settingbtn")?.classList?.remove("btn-soft-primary");
+            // document.querySelector(".shoppingbtn")?.classList?.add("btn-light");
+            document.querySelector(".settingbtn")?.classList?.add("btn-light");
+            document.getElementById("topnav")?.classList?.remove("nav-sticky");
         }
     };
     render() {

@@ -4,7 +4,8 @@ import {atomWithStorage} from "jotai/utils"
 import {TOKEN_DATA, USER_DATA} from "../config/constants";
 import AxiosClient from "./axios";
 import AxiosClientNoAuth from "./axios-no-auth";
-import {backlogTasks, doneTasks, subTasks, tasks, todoTasks} from "./task";
+import {backlogTasks, doneTasks, getAllTasks, subTasks, tasks, todoTasks} from "./task";
+import {AuthAtoms} from "./index";
 
 const LOGIN_URL = `/v1/auth/login`
 const REGISTER_URL = `/v1/auth/register`
@@ -13,9 +14,10 @@ const RESET_PASSWORD_URL = `/v1/auth/reset-password`
 const FORGOT_PASSWORD_URL = `/v1/auth/forgot-password`
 const SEND_VERIFY_EMAIL_URL = `/v1/auth/send-verification-email`
 const VERIFY_EMAIL_URL = `/v1/auth/verify-email`
+const USERS_URL = `/v1/users/`
 
 export const tokens = atomWithStorage(TOKEN_DATA, null)
-export const user = atomWithStorage(USER_DATA, localStorage.getItem(USER_DATA))
+export const user = atomWithStorage(USER_DATA, JSON.parse(localStorage.getItem(USER_DATA)))
 export const isLoggedIn = atom(!!user.read)
 export const sendResetPassword = atom(false)
 export const sendForgotPassword = atom(false)
@@ -134,6 +136,57 @@ export const verifyEmailRequest =
             }
 
             return response
+        }
+    )
+
+export const getUser =
+    atom((get) => get(user),
+        async (_get, set, {id}) => {
+            (await AxiosClient(true)).get(`${USERS_URL}${id}`).then((response) => {
+                if (response.status === HttpStatusCode.Ok) {
+                    set(user, response.data)
+                }
+
+                if (response.status === HttpStatusCode.Unauthorized) {
+                    AuthAtoms.clearData(set)
+                }
+
+                return response
+            }).catch(error => {
+                if (error.response && error.response.status === HttpStatusCode.Unauthorized) {
+                    AuthAtoms.clearData(set)
+                }
+
+                return error
+            })
+
+        }
+    )
+
+export const updateUser =
+    atom((get) => get(user),
+        async (_get, set, {data, id}) => {
+            const response = await (await AxiosClient(true))
+                .patch(`${USERS_URL}${id}`, data).then((response) => {
+                    if (response.status === HttpStatusCode.Ok) {
+                        set(user, response.data)
+                    }
+
+                    if (response.status === HttpStatusCode.Unauthorized) {
+                        AuthAtoms.clearData(set)
+                    }
+
+                    return response
+                }).catch(error => {
+                    if (error.response && error.response.status === HttpStatusCode.Unauthorized) {
+                        AuthAtoms.clearData(set)
+                    }
+
+                    return error
+                })
+
+            return response
+
         }
     )
 

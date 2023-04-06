@@ -21,10 +21,10 @@ import contact from "../../../assets/images/contact.svg";
 
 class PageContactOne extends Component {
   constructor(props) {
-    
+
     super(props);
     this.state = {
-     
+
       Contactvisible: false,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -41,12 +41,12 @@ class PageContactOne extends Component {
 
   componentDidMount() {
     document.body.classList = "";
-    document.querySelector(".shoppingbtn").classList.add("btn-primary");
-    window.addEventListener("scroll", this.scrollNavigation, true); 
-    // document.querySelector(".cookie-popup").classList.remove("show");   
+    document.querySelector(".shoppingbtn")?.classList?.add("btn-primary");
+    window.addEventListener("scroll", this.scrollNavigation, true);
+    // document.querySelector(".cookie-popup")?.classList?.remove("show");
   }
 
-  
+
 
   // Make sure to remove the DOM listener when the component is unmounted.
   componentWillUnmount() {
@@ -62,9 +62,9 @@ class PageContactOne extends Component {
         navBar.classList.add("nav-sticky");
       } else {
         navBar.classList.remove("nav-sticky");
-        document.querySelector(".shoppingbtn").classList.add("btn-primary");
-        document.querySelector(".shoppingbtn").classList.remove("btn-light");
-        document.querySelector(".settingbtn").classList.add("btn-soft-primary");
+        document.querySelector(".shoppingbtn")?.classList?.add("btn-primary");
+        document.querySelector(".shoppingbtn")?.classList?.remove("btn-light");
+        document.querySelector(".settingbtn")?.classList?.add("btn-soft-primary");
       }
     }
   };

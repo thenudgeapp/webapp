@@ -31,7 +31,7 @@ const PageServices = () => {
         { imgUrl: work4, title: "Riser Coffee", subtitle: "Branding", author: "Calvin Carlo", date: "13th August, 2019" },
     ];
     useEffect(() => {
-        document.querySelector(".shoppingbtn").classList.add("btn-primary");
+        document.querySelector(".shoppingbtn")?.classList?.add("btn-primary");
         window.addEventListener("scroll", scrollNavigation, true);
     });
 
@@ -44,9 +44,9 @@ const PageServices = () => {
                 navBar.classList.add("nav-sticky");
             } else {
                 navBar.classList.remove("nav-sticky");
-                document.querySelector(".shoppingbtn").classList.add("btn-primary");
-                document.querySelector(".shoppingbtn").classList.remove("btn-light");
-                document.querySelector(".settingbtn").classList.add("btn-soft-primary");
+                document.querySelector(".shoppingbtn")?.classList?.add("btn-primary");
+                document.querySelector(".shoppingbtn")?.classList?.remove("btn-light");
+                document.querySelector(".settingbtn")?.classList?.add("btn-soft-primary");
             }
         }
     };

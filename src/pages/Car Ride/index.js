@@ -13,8 +13,8 @@ import Popup from "../../components/Layout/popup";
 class IndexCarRiding extends Component {
   componentDidMount() {
     document.body.classList = "";
-    document.getElementById("topnav").classList.add("bg-white");
-    document.querySelector(".shoppingbtn").classList.add("btn-primary");
+    document.getElementById("topnav")?.classList?.add("bg-white");
+    document.querySelector(".shoppingbtn")?.classList?.add("btn-primary");
     window.addEventListener("scroll", this.scrollNavigation, true);
   }
   // Make sure to remove the DOM listener when the component is unmounted.
@@ -31,9 +31,9 @@ class IndexCarRiding extends Component {
         navBar.classList.add("nav-sticky");
       } else {
         navBar.classList.remove("nav-sticky");
-        document.querySelector(".shoppingbtn").classList.add("btn-primary");
-        document.querySelector(".shoppingbtn").classList.remove("btn-light");
-        document.querySelector(".settingbtn").classList.add("btn-soft-primary");
+        document.querySelector(".shoppingbtn")?.classList?.add("btn-primary");
+        document.querySelector(".shoppingbtn")?.classList?.remove("btn-light");
+        document.querySelector(".settingbtn")?.classList?.add("btn-soft-primary");
       }
     }
   };
@@ -97,7 +97,7 @@ class IndexCarRiding extends Component {
             </svg>
           </div>
         </div>
-        
+
         {/* Popup */}
         <Popup />
       </React.Fragment>
