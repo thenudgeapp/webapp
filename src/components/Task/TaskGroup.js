@@ -41,8 +41,6 @@ const renderTasks = (tasks, status) => {
 }
 
 const TaskGroup = (props) => {
-    console.log("sssssssssssssssssssss")
-
     const [addTask, setAddTask] = useState(false)
 
 
@@ -64,9 +62,6 @@ const TaskGroup = (props) => {
                                     <Grid justifyContent={'flex-end'} alignItems={'center'}>
                                         <IconButton style={{padding: '2px'}} onClick={() => setAddTask(true)}>
                                             <Add />
-                                        </IconButton>
-                                        <IconButton style={{padding: '2px'}} aria-label="settings">
-                                            <MoreVert />
                                         </IconButton>
                                     </Grid>
                                 </Grid>

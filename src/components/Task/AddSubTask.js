@@ -16,8 +16,8 @@ const AddSubTask = ({...props}) => {
     const [errorMessage, setErrorMessage] = useState();
     const [title, setTitle] = useState(props.title || '');
     const [description, setDescription] = useState(props.description || '');
-    const [startDate, setStartDate] = useState(props.startDate ? dayjs.unix(props.startDate) : new Date());
-    const [endDate, setEndDate] = useState(props.endDate ? dayjs.unix(props.endDate ) : new Date());
+    const [startDate, setStartDate] = useState(props.startDate ? dayjs.unix(props.startDate) : undefined);
+    const [endDate, setEndDate] = useState(props.endDate ? dayjs.unix(props.endDate ) : undefined);
     const [status, setStatus] = useState(props.status);
     const [, getBacklogTasks] = useAtom(TaskAtom.getBacklogTasks)
     const [, getTodoTasks] = useAtom(TaskAtom.getTodoTasks)
@@ -44,17 +44,30 @@ const AddSubTask = ({...props}) => {
 
     }
 
+    const invalidDate = (dueDate) => {
+        if (dueDate && ((props.parentEndDate && dueDate > props.parentEndDate)
+            || (props.parentStartDate && dueDate < props.parentStartDate)) ) {
+            setErrorMessage('Due date must be before the main task\'s due date')
+            return true
+        }
+
+        return false
+    }
+
     const updateSubTask = () => {
+        const dueDate = endDate?.set('hour', 0).set('minute', 0).set('second', 0).set('millisecond', 0).unix()
+        if(invalidDate(dueDate)) {
+            return
+        }
         setLoading(true)
         setErrorMessage(null)
         updateTask({
             data: {
                 description,
-                startDate: startDate.unix(),
-                endDate: endDate.unix(),
+                endDate: dueDate,
                 status
             },
-            id: props.id
+            id: props._id
         }).then(async (response, error) => {
             if (response.status !== HttpStatusCode.Ok) {
                 setErrorMessage(response.response.data.message)
@@ -75,14 +88,8 @@ const AddSubTask = ({...props}) => {
         if (!description) {
             message += '\n・Task description is required'
         }
-        if (!startDate) {
-            message += '<br/>・Task start date is required'
-        }
-        if (!endDate) {
-            message += '<br/>・Task end date is required'
-        }
 
-        if (startDate - endDate > 0) {
+        if (startDate && endDate && startDate - endDate > 0) {
             message += '<br/>・Task start date must be before the end date'
         }
 
@@ -91,6 +98,10 @@ const AddSubTask = ({...props}) => {
             return
         }
 
+        const dueDate = endDate?.set('hour', 0).set('minute', 0).set('second', 0).set('millisecond', 0).unix()
+        if(invalidDate(dueDate)) {
+            return
+        }
         setTitle(description)
 
         setLoading(true)
@@ -100,8 +111,7 @@ const AddSubTask = ({...props}) => {
                 parentId: props.parent,
                 title: description,
                 description,
-                startDate: dayjs(startDate).unix(),
-                endDate: dayjs(endDate).unix(),
+                endDate: dueDate,
                 status: props.status
             }
         }).then(async (response, error) => {
@@ -148,17 +158,10 @@ const AddSubTask = ({...props}) => {
             <MDBox mb={4} mt={4} display={{md: 'flex', lg: 'flex', sm: 'block'}} justifyContent={'space-evenly'}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker
-                        label="Start Date"
-                        value={startDate}
-                        onChange={(newValue) => {
-                            setStartDate(newValue);
-                        }}
-                        renderInput={(params) => <TextField fullWidth {...params} sx={{marginBottom: "20px", paddingRight: {lg: "10px"}}} />}
-                    />
-                    <DatePicker
-                        label="End Date"
+                        label="Due Date"
                         value={endDate}
-                        minDate={startDate}
+                        minDate={dayjs.unix(props.parentStartDate )}
+                        maxDate={dayjs.unix(props.parentEndDate )}
                         onChange={(newValue) => {
                             setEndDate(newValue);
                         }}
@@ -172,7 +175,7 @@ const AddSubTask = ({...props}) => {
                             props.setOpen(false)
                         }}>Cancel</Button>
                 {
-                    props.id ? <Button size={'small'} variant={'contained'}
+                    props._id ? <Button size={'small'} variant={'contained'}
                                        onClick={() => {
                                            updateSubTask()
                                        }}>
