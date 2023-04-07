@@ -74,7 +74,7 @@ const TaskItem = (props) => {
 
         days = Math.abs(days)
 
-        return `${overdue} ${days === 1 ? `${days} day` : `${days} days`}`
+        return days  === 0 ? 'Due today': `${overdue} ${days === 1 ? `${days} day` : `${days} days`}`
     }
 
     const toPlainText = (raw) => {
@@ -204,7 +204,7 @@ const TaskItem = (props) => {
                     </CardContent>
                     <CardActions disableSpacing>
                         <MDBox display={'flex'} justifyContent={'flex-end'} width={'100%'}>
-                            <Typography variant={'caption'}>{days(props.task.endDate)}</Typography>
+                            <Typography variant={'caption'}>{props.task.endDate && days(props.task.endDate)}</Typography>
                         </MDBox>
                     </CardActions>
                     <TaskDetail open={openTaskDetail} setOpen={setOpenTaskDetail}

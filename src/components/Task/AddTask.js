@@ -28,8 +28,8 @@ const style = {
 const AddTask = ({...props}) => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(new Date());
+    const [startDate, setStartDate] = useState();
+    const [endDate, setEndDate] = useState();
     const [tasks, addTask] = useAtom(TaskAtom.addTask)
     const [loading, setLoading] = useState(false)
     const [errorMessage, setErrorMessage] = useState()
@@ -51,14 +51,12 @@ const AddTask = ({...props}) => {
         if (!valIntermediate) {
             message += '<br/>・Task description is required'
         }
-        if (!startDate) {
-            message += '<br/>・Task start date is required'
-        }
-        if (!endDate) {
-            message += '<br/>・Task end date is required'
-        }
 
-        if (startDate - endDate > 0) {
+        /*if (!startDate && endDate) {
+            message += '<br/>・If you select an end date, you must provide a start date which must be before the end date'
+        }*/
+
+        if (startDate && endDate && startDate - endDate > 0) {
             message += '<br/>・Task start date must be before the end date'
         }
 
@@ -74,8 +72,8 @@ const AddTask = ({...props}) => {
               title,
               description: valIntermediate,
               goal: goalValIntermediate,
-              startDate: dayjs(startDate).unix(),
-              endDate: dayjs(endDate).unix(),
+              startDate: startDate ? dayjs(startDate)?.set('hour', 0).set('minute', 0).set('second', 0).set('millisecond', 0).unix() : undefined,
+              endDate: endDate ? dayjs(endDate)?.set('hour', 0).set('minute', 0).set('second', 0).set('millisecond', 0).unix() : undefined,
               status: props.status
           }
       }).then(async (response, error) => {
@@ -160,8 +158,8 @@ const AddTask = ({...props}) => {
                               }
                           }}>
                               <MDBox mb={4}>
-                                  <MDInput type="text" label="Title" variant="standard"
-                                           fullWidth value={title}
+                                  <MDInput type="text" label="Title" variant="standard" sx={{fontSize: '4pt !important;'}}
+                                           fullWidth value={title} id={'task-title-bigger'}
                                            onChange={(newValue) => setTitle(newValue.target.value)} />
                               </MDBox>
                               <MDBox mb={4}>
@@ -176,7 +174,7 @@ const AddTask = ({...props}) => {
                                   <Typography variant={'body2'}>
                                       Description
                                   </Typography>
-                                  <Editor placeholderText={'Details about this task'} enable={showToolbar} onChange={setValIntermediate}/>
+                                  <Editor placeholderText={'E.g, conduct market research for iPhone buyers, update the Nudge app\'s sign-up feature'} enable={showToolbar} onChange={setValIntermediate}/>
                               </MDBox>
                               <MDBox mb={4}>
                                   <MDBox display={'flex'} alignItems={'center'} justifyContent={'flex-end'}>
@@ -190,7 +188,7 @@ const AddTask = ({...props}) => {
                                   <Typography variant={'body2'}>
                                       Goal
                                   </Typography>
-                                  <Editor placeholderText={'Tell us more about the goal you want to achieve'}
+                                  <Editor placeholderText={'E.g, increase conversion rate by 10%, improve trust with executives, increase app uptime by 5%'}
                                           enable={showGoalToolbar} onChange={setGoalValIntermediate}/>
                               </MDBox>
                               <MDBox mb={4} display={{md: 'flex', lg: 'flex', sm: 'block'}} justifyContent={'space-evenly'}>

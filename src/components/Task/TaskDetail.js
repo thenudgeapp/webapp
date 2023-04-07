@@ -3,7 +3,7 @@ import {Box, Button, Checkbox, CircularProgress, Grid, IconButton, ListItem, Mod
 import MDBox from "../Shared/MDBox";
 import {
     Cancel, CenterFocusWeak,
-    Close,
+    Close, DateRange,
     DeleteOutline,
     EditOutlined,
     KeyboardArrowDown,
@@ -50,8 +50,8 @@ const TaskDetail = ({...props}) => {
     const [title, setTitle] = useState(props.task.title)
     const [titleInter, setTitleInter] = useState(props.task.title)
     const [editTitle, setEditTitle] = useState(false)
-    const [startDate, setStartDate] = useState(props.task.startDate || new Date());
-    const [endDate, setEndDate] = useState(props.task.endDate || new Date());
+    const [startDate, setStartDate] = useState(props.task.startDate);
+    const [endDate, setEndDate] = useState(props.task.endDate);
     const [open, setOpen] = useState(false)
     const [dateRange, setDateRange] = useState({})
     const [valIntermediate, setValIntermediate] = useState(props.task.description)
@@ -82,11 +82,13 @@ const TaskDetail = ({...props}) => {
     }, [])
 
     useEffect(() => {
-        if(dateRange && dateRange.startDate) {
+        if (dateRange && dateRange.startDate) {
             setStartDate(dateRange.startDate.getTime() / 1000)
             setEndDate(dateRange.endDate.getTime() / 1000)
 
-            saveTask( false,false, false, false, true);
+            setTimeout(() => {
+                saveTask(false, false, false, false, true);
+            }, 200)
         }
     }, [dateRange])
 
@@ -101,59 +103,70 @@ const TaskDetail = ({...props}) => {
         }
     }
 
+    const getTimeSpan = () => {
+        return startDate && endDate ?
+            `${dayjs.unix(startDate).format('MMMM D')} - ${dayjs.unix(endDate).format('MMMM D, YYYY')}`
+            :
+            startDate ?
+                `${startDate && dayjs.unix(startDate).format('MMMM D, YYYY')}` :
+                endDate ?
+                    ` - ${dayjs.unix(endDate).format('MMMM D, YYYY')}`
+                    : ''
+    }
+
     const renderSubTasks = () => {
         return props.task.subTasks.map((task, index) => (
-            <ListItem key={task._id} alignItems="center">
-                <MDBox display={'flex'} justifyContent={'space-between'} alignItems="center" width={'100%'}>
-                    <MDBox justifyContent={'flex-start'} display={'flex'} alignItems="center" width={'80%'}>
-                        <Checkbox size={'small'} checked={checkedStates[task._id] === 'DONE'} onClick={(event => {
-                            const status = !checkedStates[task._id] || checkedStates[task._id] === 'TODO' ? 'DONE' : 'TODO'
-                            saveTask(true, false, false, false, false, task._id, status)
-                            setCheckedStates((prev) => {
-                                return {...prev, [task._id]: status}
-                            })
-                        })}
-                        />
-                        <Typography display={{
-                            xs: 'none',
-                            lg: 'block'
-                        }} variant={'body2'} color="text.secondary" marginLeft={'.4em'}
-                                    sx={{
-                                        overflow: 'hidden',
-                                        textOverflow: 'ellipsis',
-                                        display: '-webkit-box',
-                                        'WebkitLineClamp': '1',
-                                        'WebkitBoxOrient': 'vertical'
-                                    }} onClick={() => {
-                            setSelectedSubTask(task)
-                            setShowAddSubTask(true)
-                        }}>
-                            {task.description}
-                        </Typography>
-                    </MDBox>
-                    <MDBox justifyContent={'flex-end'}>
-                        <MDBox justifyContent={'space-evenly'} width={'100%'} display={'flex'} alignItems="center">
+                <ListItem key={task._id} alignItems="center">
+                    <MDBox display={'flex'} justifyContent={'space-between'} alignItems="center" width={'100%'}>
+                        <MDBox justifyContent={'flex-start'} display={'flex'} alignItems="center" width={'80%'}>
+                            <Checkbox size={'small'} checked={checkedStates[task._id] === 'DONE'} onClick={(event => {
+                                const status = !checkedStates[task._id] || checkedStates[task._id] === 'TODO' ? 'DONE' : 'TODO'
+                                saveTask(true, false, false, false, false, task._id, status)
+                                setCheckedStates((prev) => {
+                                    return {...prev, [task._id]: status}
+                                })
+                            })}
+                            />
                             <Typography display={{
                                 xs: 'none',
                                 lg: 'block'
-                            }} variant={'body2'} color="text.secondary" marginLeft={'.4em'}>
-                                {`${dayjs.unix(task.endDate).format('DD/MM/YYYY')}`}
-                            </Typography>
-                            <IconButton onClick={() => {
-                                setTaskToDelete(task)
+                            }} variant={'body2'} color="text.secondary" marginLeft={'.4em'}
+                                        sx={{
+                                            overflow: 'hidden',
+                                            textOverflow: 'ellipsis',
+                                            display: '-webkit-box',
+                                            'WebkitLineClamp': '1',
+                                            'WebkitBoxOrient': 'vertical'
+                                        }} onClick={() => {
+                                setSelectedSubTask(task)
+                                setShowAddSubTask(true)
                             }}>
-                                {deletingStates[task._id] ?
-                                    <CircularProgress size={20}/> :
-                                    !taskToDelete && <DeleteOutline fontSize={'small'}/>
-                                }
-                            </IconButton>
+                                {task.description}
+                            </Typography>
+                        </MDBox>
+                        <MDBox justifyContent={'flex-end'}>
+                            <MDBox justifyContent={'space-evenly'} width={'100%'} display={'flex'} alignItems="center">
+                                <Typography display={{
+                                    xs: 'none',
+                                    lg: 'block'
+                                }} variant={'body2'} color="text.secondary" marginLeft={'.4em'}>
+                                    {`${dayjs.unix(task.endDate).format('DD/MM/YYYY')}`}
+                                </Typography>
+                                <IconButton onClick={() => {
+                                    setTaskToDelete(task)
+                                }}>
+                                    {deletingStates[task._id] ?
+                                        <CircularProgress size={20}/> :
+                                        !taskToDelete && <DeleteOutline fontSize={'small'}/>
+                                    }
+                                </IconButton>
+                            </MDBox>
                         </MDBox>
                     </MDBox>
-                </MDBox>
-                {taskToDelete && task._id === taskToDelete?._id && showDeleteConfirm()}
-            </ListItem>
+                    {taskToDelete && task._id === taskToDelete?._id && showDeleteConfirm()}
+                </ListItem>
+            )
         )
-    )
     }
 
     const confirmDeleteDialog = () => (
@@ -171,7 +184,8 @@ const TaskDetail = ({...props}) => {
                         <Button variant={'contained'} color={'secondary'} onClick={() => setConfirmDelete(false)}>
                             No
                         </Button>
-                        <Button variant="contained" style={{marginLeft: '0.4em'}} md={12} onClick={() => deleteTaskHandler(props.task.id, true)}>
+                        <Button variant="contained" style={{marginLeft: '0.4em'}} md={12}
+                                onClick={() => deleteTaskHandler(props.task.id, true)}>
                             {loading &&
                                 <i className="mdi mdi-loading icon-spinner mdi-24px me-2"></i>
                             }
@@ -211,15 +225,27 @@ const TaskDetail = ({...props}) => {
     }
 
     const showDeleteConfirm = () =>
-      <MDBox display={'flex'} alignItems={'center'} fullWidth>
-          <Typography variant={'caption'}>
-              Delete?
-          </Typography>
-          <Button variant={'contained'} size={'small'} onClick={() => setTaskToDelete(null)}
-                  color={'secondary'} style={{maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px', marginLeft: '4px'}}>No</Button>
-          <Button variant={'contained'} size={'small'} style={{maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px', marginLeft: '4px'}}
-                  onClick={() => deleteTaskHandler(taskToDelete?._id)}>Yes</Button>
-      </MDBox>
+        <MDBox display={'flex'} alignItems={'center'} fullWidth>
+            <Typography variant={'caption'}>
+                Delete?
+            </Typography>
+            <Button variant={'contained'} size={'small'} onClick={() => setTaskToDelete(null)}
+                    color={'secondary'} style={{
+                maxWidth: '30px',
+                maxHeight: '30px',
+                minWidth: '30px',
+                minHeight: '30px',
+                marginLeft: '4px'
+            }}>No</Button>
+            <Button variant={'contained'} size={'small'} style={{
+                maxWidth: '30px',
+                maxHeight: '30px',
+                minWidth: '30px',
+                minHeight: '30px',
+                marginLeft: '4px'
+            }}
+                    onClick={() => deleteTaskHandler(taskToDelete?._id)}>Yes</Button>
+        </MDBox>
 
     const reloadTasks = async (status) => {
         switch (status) {
@@ -238,7 +264,7 @@ const TaskDetail = ({...props}) => {
         }
     }
 
-    const saveTask = (isSubTask = false, isDescription=false, isGoal = false, isTitle=false, isDate=false, id = '', status = 'TODO') => {
+    const saveTask = (isSubTask = false, isDescription = false, isGoal = false, isTitle = false, isDate = false, id = '', status = 'TODO') => {
         if (!isSubTask) {
             setLoading(true)
             setErrorMessage(null)
@@ -247,8 +273,8 @@ const TaskDetail = ({...props}) => {
         }
 
         const data = isSubTask ? {
-                status
-            } : {}
+            status
+        } : {}
 
         if (isDescription) {
             data.description = valIntermediate
@@ -260,9 +286,10 @@ const TaskDetail = ({...props}) => {
             data.title = titleInter
         }
         if (isDate) {
-            data.startDate = startDate
-            data.endDate = endDate
+            data.startDate = dateRange.startDate.getTime() / 1000
+            data.endDate = dateRange.endDate.getTime() / 1000
         }
+
         updateTask({
             data,
             id: isSubTask ? id : props.task.id
@@ -278,7 +305,7 @@ const TaskDetail = ({...props}) => {
             await reloadTasks(props.task.status)
             setLoading(false)
 
-            if(isDescription) {
+            if (isDescription) {
                 return setDisplayEditor(false)
             }
             if (isGoal) {
@@ -305,31 +332,33 @@ const TaskDetail = ({...props}) => {
                 <MDBox sx={{
                     gridArea: '1 / 1 / 2 / 2'
                 }}>
-                    <MDBox  sx={style} className={'bg-light-gray'}
-                            width={{xs: "90%", lg: "50%"}}
-                            display="flex"
-                            flexDirection={{xs: "column", lg: "row"}}
-                            justifyContent="space-between"
-                            alignItems="center"
-                            px={1.5}>
+                    <MDBox sx={style} className={'bg-light-gray'}
+                           width={{xs: "90%", lg: "50%"}}
+                           display="flex"
+                           flexDirection={{xs: "column", lg: "row"}}
+                           justifyContent="space-between"
+                           alignItems="center"
+                           px={1.5}>
                         <Grid spacing={1} container>
                             <Grid item lg={12} xs={12} className={'position-absolute w-100 top-0 left-0 p-3'}
                                   sx={{left: 0}}>
-                                <MDBox display={'flex'} flexDirection="row" justifyContent={'space-between'} marginLeft='0.7em'>
+                                <MDBox display={'flex'} flexDirection="row" justifyContent={'space-between'}
+                                       marginLeft='0.7em'>
                                     <MDBox display={'flex'} flexDirection={'row'} alignItems={'center'} width={'100%'}>
                                         {
                                             editTitle ?
-                                                <MDBox mb={4} sx={{width: '100%'}} display={'flex'} justifyContent={'stretch'}>
+                                                <MDBox mb={4} sx={{width: '100%'}} display={'flex'}
+                                                       justifyContent={'stretch'}>
                                                     <MDInput type="text" label="Title" variant="standard" fullWidth
-                                                             defaultValue={title}
-                                                             onChange={(newValue) => setTitleInter(newValue.target.value)} />
+                                                             defaultValue={title} id={'task-title-bigger'}
+                                                             onChange={(newValue) => setTitleInter(newValue.target.value)}/>
                                                     <MDBox display={'inline-flex'} alignItems={'center'}>
                                                         {!loading &&
                                                             <>
                                                                 <IconButton variant={'contained'} size={'small'}
                                                                             onClick={() => {
                                                                                 setTitle(titleInter);
-                                                                                saveTask(false,false, false, true, false);
+                                                                                saveTask(false, false, false, true, false);
                                                                             }}>
                                                                     <Save/>
                                                                 </IconButton>
@@ -348,10 +377,11 @@ const TaskDetail = ({...props}) => {
                                                         }
                                                     </MDBox>
                                                 </MDBox>
-                                                 :
+                                                :
                                                 <>
                                                     <MDBox display={'flex'} alignItems={'center'}>
-                                                        <div className={'h6 mb-0 one-line text-black editor-text-bold'} onClick={() => setEditTitle(true)}>
+                                                        <div className={'h6 mb-0 one-line text-black editor-text-bold'}
+                                                             onClick={() => setEditTitle(true)}>
                                                             <Typography variant={'h6'}>
                                                                 {title}
                                                             </Typography>
@@ -384,7 +414,7 @@ const TaskDetail = ({...props}) => {
                                       maxHeight: 'calc(100vh - 120px)',
                                       overflow: 'auto',
                                   }}>
-                                <MDBox  sx={{
+                                <MDBox sx={{
                                     xs: {
                                         maxHeight: 'calc(50vh - 120px)',
                                         overflow: 'auto',
@@ -399,17 +429,18 @@ const TaskDetail = ({...props}) => {
                                         <Typography variant={'h6'} color="text.secondary" marginLeft={'8px'}>
                                             Description
                                         </Typography>
-                                        <IconButton onClick={() => setDisplayEditor(true) }>
+                                        <IconButton onClick={() => setDisplayEditor(true)}>
                                             <EditOutlined fontSize={'small'}/>
                                         </IconButton>
                                     </MDBox>
                                     <MDBox>
                                         {displayEditor ?
                                             <MDBox>
-                                                <MDBox display={'flex'} alignItems={'center'} justifyContent={'flex-end'}>
+                                                <MDBox display={'flex'} alignItems={'center'}
+                                                       justifyContent={'flex-end'}>
                                                     <Button
                                                         onClick={() => setShowToolbar((prev) => !prev)}>
-                                                        { showToolbar ?
+                                                        {showToolbar ?
                                                             'Hide Toolbar' : 'Show Toolbar'
                                                         }
                                                     </Button>
@@ -427,13 +458,14 @@ const TaskDetail = ({...props}) => {
 
                                             </MDBox> :
                                             <MDBox marginLeft={'1.4em'}
-                                                        onClick={() => setDisplayEditor(true)}>
+                                                   onClick={() => setDisplayEditor(true)}>
                                                 <div color="text.secondary" className="h6"
                                                      dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(toHtml(val))}}/>
                                             </MDBox>}
                                     </MDBox>
                                     {displayEditor &&
-                                        <MDBox display={'flex'} justifyContent={'flex-end'} alignItems={'space-between'}>
+                                        <MDBox display={'flex'} justifyContent={'flex-end'}
+                                               alignItems={'space-between'}>
                                             {errorMessage && <MDBox lg={12} className="mb-0">
                                                 <div className="d-grid">
                                                     <Alert className="bg-soft-danger fw-medium">
@@ -442,15 +474,16 @@ const TaskDetail = ({...props}) => {
                                                     </Alert>
                                                 </div>
                                             </MDBox>}
-                                            <Box sx={{ '& button': { m: 1 } }}>
-                                                <Button color={'secondary'} size={'small'} style={{padding: '4px'}} variant={'contained'}
+                                            <Box sx={{'& button': {m: 1}}}>
+                                                <Button color={'secondary'} size={'small'} style={{padding: '4px'}}
+                                                        variant={'contained'}
                                                         onClick={() => {
                                                             setDisplayEditor(false)
                                                             setVal(props.task.description)
                                                         }}>Cancel</Button>
                                                 <Button size={'small'} variant={'contained'}
                                                         onClick={() => {
-                                                            saveTask(false,true, false, false, false)
+                                                            saveTask(false, true, false, false, false)
                                                         }}>
                                                     {loading &&
                                                         <i className="mdi mdi-loading icon-spinner mdi-24px me-2"></i>
@@ -466,17 +499,18 @@ const TaskDetail = ({...props}) => {
                                         <Typography variant={'h6'} color="text.secondary" marginLeft={'8px'}>
                                             Goal
                                         </Typography>
-                                        <IconButton onClick={() => setDisplayGoalEditor(true) }>
+                                        <IconButton onClick={() => setDisplayGoalEditor(true)}>
                                             <EditOutlined fontSize={'small'}/>
                                         </IconButton>
                                     </MDBox>
                                     <MDBox>
                                         {displayGoalEditor ?
                                             <MDBox>
-                                                <MDBox display={'flex'} alignItems={'center'} justifyContent={'flex-end'}>
+                                                <MDBox display={'flex'} alignItems={'center'}
+                                                       justifyContent={'flex-end'}>
                                                     <Button
                                                         onClick={() => setShowGoalToolbar((prev) => !prev)}>
-                                                        { showGoalToolbar ?
+                                                        {showGoalToolbar ?
                                                             'Hide Toolbar' : 'Show Toolbar'
                                                         }
                                                     </Button>
@@ -500,7 +534,8 @@ const TaskDetail = ({...props}) => {
                                             </MDBox>}
                                     </MDBox>
                                     {displayGoalEditor &&
-                                        <MDBox display={'flex'} justifyContent={'flex-end'} alignItems={'space-between'}>
+                                        <MDBox display={'flex'} justifyContent={'flex-end'}
+                                               alignItems={'space-between'}>
                                             {errorMessage && <MDBox lg={12} className="mb-0">
                                                 <div className="d-grid">
                                                     <Alert className="bg-soft-danger fw-medium">
@@ -509,15 +544,16 @@ const TaskDetail = ({...props}) => {
                                                     </Alert>
                                                 </div>
                                             </MDBox>}
-                                            <Box sx={{ '& button': { m: 1 } }}>
-                                                <Button color={'secondary'} size={'small'} style={{padding: '4px'}} variant={'contained'}
+                                            <Box sx={{'& button': {m: 1}}}>
+                                                <Button color={'secondary'} size={'small'} style={{padding: '4px'}}
+                                                        variant={'contained'}
                                                         onClick={() => {
                                                             setDisplayGoalEditor(false)
                                                             setGoalVal(props.task.goal)
                                                         }}>Cancel</Button>
                                                 <Button size={'small'} variant={'contained'}
                                                         onClick={() => {
-                                                            saveTask(false,false, true, false, false)
+                                                            saveTask(false, false, true, false, false)
                                                         }}>
                                                     {loading &&
                                                         <i className="mdi mdi-loading icon-spinner mdi-24px me-2"></i>
@@ -527,18 +563,25 @@ const TaskDetail = ({...props}) => {
                                             </Box>
                                         </MDBox>
                                     }
-                                    <MDBox bgColor={'lightGray'} marginLeft={'1.4em'} marginTop={'0.4em'} display={'inline-block'}>
+                                    <MDBox display={'flex'} alignItems={'center'}>
+                                        <DateRange spacing={10}/>
+                                        <Typography variant={'h6'} color="text.secondary" marginLeft={'8px'}>
+                                            Duration
+                                        </Typography>
+                                    </MDBox>
+                                    <MDBox bgColor={'lightGray'} marginLeft={'1.4em'} marginTop={'0.4em'}
+                                           display={'inline-block'}>
                                         <Button variant={'secondary'} size={'small'} padding={'1em'} onClick={toggle}>
-                                                {`${dayjs.unix(startDate).format('MMMM D')} - ${dayjs.unix(endDate).format('MMMM D, YYYY')}`}
+                                            {getTimeSpan()}
                                             <KeyboardArrowDown/>
                                         </Button>
                                         <DateRangePicker minDate={startDate}
-                                            definedRanges={[]}
-                                            open={open}
-                                            toggle={toggle}
-                                            onChange={(range) => {
-                                                setDateRange(range)
-                                            }}
+                                                         definedRanges={[]}
+                                                         open={open}
+                                                         toggle={toggle}
+                                                         onChange={(range) => {
+                                                             setDateRange(range)
+                                                         }}
                                         />
                                     </MDBox>
                                     <MDBox display={'flex'} alignItems={'center'} marginTop={'1em'}>
@@ -556,26 +599,30 @@ const TaskDetail = ({...props}) => {
                                     <MDBox marginLeft={'1.5em'} color={'lightGray'}>
                                         <Button size={'small'} variant={'contained'} color={'fadedButton2'}
                                                 disableElevation onClick={() => {
-                                                    setSelectedSubTask({})
+                                            setSelectedSubTask({})
                                             setShowAddSubTask(true)
                                         }}>
                                             Add a task
                                         </Button>
                                         {showAddSubTask ? <AddSubTask key={selectedSubTask.id} open={showAddSubTask}
-                                                                       setOpen={setShowAddSubTask} parentStatus={props.task.status}
-                                                                       {...selectedSubTask} parent={props.task.id}
-                                                                       autoFocus/> : <></>}
+                                                                      setOpen={setShowAddSubTask}
+                                                                      parentStartDate={props.task.startDate}
+                                                                      parentEndDate={props.task.endDate}
+                                                                      parentStatus={props.task.status}
+                                                                      {...selectedSubTask} parent={props.task.id}
+                                                                      autoFocus/> : <></>}
                                     </MDBox>
                                 </MDBox>
                             </Grid>
                         </Grid>
                         <MDBox display={'flex'} justifyContent={'flex-end'} alignItems={'flex-end'}>
                             {confirmDelete && confirmDeleteDialog()}
-                            <MDBox display={'flex'} justifyContent={'flex-end'} alignItems={'flex-end'} width={'100%'} sx={{
-                                marginRight: '-0.84em'
-                            }}>
+                            <MDBox display={'flex'} justifyContent={'flex-end'} alignItems={'flex-end'} width={'100%'}
+                                   sx={{
+                                       marginRight: '-0.84em'
+                                   }}>
                                 <IconButton onClick={() => setConfirmDelete(true)}>
-                                    <DeleteOutline />
+                                    <DeleteOutline/>
                                 </IconButton>
                             </MDBox>
                         </MDBox>
